@@ -1,0 +1,54 @@
+.menu-outer > div:nth-child(1) > a:nth-child(1){
+    display: none;
+}
+
+@media (max-width: 840px){
+    .header-top{
+        display: none;
+    }
+}
+
+body > div > section.service-style-five > div > div > div.owl-dots.disabled, 
+body > div > section.service-style-five > div > div > div.owl-nav,
+body > div > section.team-section.about-page.sec-pad > div > div.three-item-carousel.owl-carousel.owl-theme.owl-loaded.owl-drag > div.owl-dots.disabled,
+body > div > section.team-section.about-page.sec-pad > div > div.three-item-carousel.owl-carousel.owl-theme.owl-loaded.owl-drag > div.owl-nav,
+#tab-5 > div > div.owl-dots,
+#tab-6 > div > div.owl-dots
+#tab-7 > div > div.owl-dots{
+    display: none;
+}
+
+.service-block-two .inner-box p{
+    position: relative;
+    display: block;
+    font-size: 16px;
+    line-height: 21px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    z-index: 1;
+    height: 120px;
+}
+
+/* body > div > section.team-section.about-page.sec-pad > div > div.three-item-carousel.owl-carousel.owl-theme.owl-loaded.owl-drag > div.owl-stage-outer > div > div > div > div > div.lower-content{
+    height: 26vh;
+} */
+
+.marglr-8-paddlr-8 {
+    margin: 0px 0px;
+    padding: 0px 17px;
+}
+
+body > div > section.news-style-two.sec-pad > div > div.row.clearfix > div.col-lg-8.col-md-6.col-sm-12.news-block > div > div.owl-stage-outer > div > div.owl-item.active > div > div > div > div > div.lower-box > h3{
+    height: 8vh;
+}
+
+.support-widget ul{ margin: 0; padding: 0; }
+.support-widget ul>li {
+    padding: 0 0 8px 0;
+    position: relative;
+    color: white!important;
+}
+
+.support-widget ul>li>a {
+    color: white!important;
+}
