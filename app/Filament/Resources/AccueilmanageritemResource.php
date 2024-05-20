@@ -13,6 +13,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\AccueilmanageritemResource\Pages;
+use App\Models\Accueilmanager;
 
 class AccueilmanageritemResource extends Resource
 {
@@ -148,9 +149,10 @@ class AccueilmanageritemResource extends Resource
                         ]),
 
                     Select::make('accueilmanager_id')
-                        ->rules(['exists:accueilmanagers,id'])
+                        // ->rules(['exists:accueilmanagers,id'])
                         ->nullable()
-                        ->relationship('accueilmanager', 'title')
+                        // ->relationship('accueilmanager', 'title')
+                        ->options(Accueilmanager::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Accueilmanager')
                         ->columnSpan([

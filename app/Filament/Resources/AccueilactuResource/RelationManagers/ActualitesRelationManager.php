@@ -4,9 +4,10 @@ namespace App\Filament\Resources\AccueilactuResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Resources\{Form, Table};
+use App\Models\Typeformation;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
@@ -109,8 +110,9 @@ class ActualitesRelationManager extends RelationManager
                     ]),
 
                 Select::make('typeformation_id')
-                    ->rules(['exists:typeformations,id'])
-                    ->relationship('typeformation', 'title')
+                    // ->rules(['exists:typeformations,id'])
+                    // ->relationship('typeformation', 'title')
+                    ->options(Typeformation::all()->pluck('title', 'id')->toArray())
                     ->searchable()
                     ->placeholder('Typeformation')
                     ->columnSpan([

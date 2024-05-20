@@ -41,7 +41,8 @@ class RoleResource extends Resource
                         ->required(),
 
                     MultiSelect::make('permissions')
-                        ->relationship('permissions', 'name')
+                        // ->relationship('permissions', 'name')
+                        ->options(Permission::all()->pluck('name', 'id')->toArray())
                         ->preload()
                         ->required()
 

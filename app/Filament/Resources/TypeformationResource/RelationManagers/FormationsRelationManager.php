@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TypeformationResource\RelationManagers;
 
+use App\Models\Accueilformation;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\{Form, Table};
@@ -81,8 +82,9 @@ class FormationsRelationManager extends RelationManager
                     ]),
 
                 Select::make('accueilformation_id')
-                    ->rules(['exists:accueilformations,id'])
-                    ->relationship('accueilformation', 'title')
+                    // ->rules(['exists:accueilformations,id'])
+                    // ->relationship('accueilformation', 'title')
+                    ->options(Accueilformation::all()->pluck('title', 'id')->toArray())
                     ->searchable()
                     ->placeholder('Accueilformation')
                     ->columnSpan([

@@ -14,6 +14,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\AccueilclientitemResource\Pages;
+use App\Models\Accueilclient;
 
 class AccueilclientitemResource extends Resource
 {
@@ -160,9 +161,10 @@ class AccueilclientitemResource extends Resource
                         ]),
 
                     Select::make('accueilclient_id')
-                        ->rules(['exists:accueilclients,id'])
+                        // ->rules(['exists:accueilclients,id'])
                         ->nullable()
-                        ->relationship('accueilclient', 'title')
+                        // ->relationship('accueilclient', 'title')
+                        ->options(Accueilclient::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Accueilclient')
                         ->columnSpan([

@@ -14,6 +14,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use App\Filament\Filters\DateRangeFilter;
 use App\Filament\Resources\EquipeResource\Pages;
+use App\Models\Accueiltemoin;
 
 class EquipeResource extends Resource
 {
@@ -122,9 +123,10 @@ class EquipeResource extends Resource
                         ]),
 
                     Select::make('accueiltemoin_id')
-                        ->rules(['exists:accueiltemoins,id'])
+                        // ->rules(['exists:accueiltemoins,id'])
                         ->nullable()
-                        ->relationship('accueiltemoin', 'title')
+                        // ->relationship('accueiltemoin', 'title')
+                        ->options(Accueiltemoin::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Accueiltemoin')
                         ->columnSpan([

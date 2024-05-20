@@ -3,17 +3,19 @@
 namespace App\Filament\Resources;
 
 use App\Models\Formation;
+use App\Models\Typeformation;
 use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use App\Filament\Filters\DateRangeFilter;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Filters\DateRangeFilter;
+use Filament\Resources\{Form, Table, Resource};
 use App\Filament\Resources\FormationResource\Pages;
+use App\Models\Accueilformation;
 
 class FormationResource extends Resource
 {
@@ -94,8 +96,9 @@ class FormationResource extends Resource
                     Select::make('typeformation_id')
                         // ->rules(['exists:typeformations,id'])
                         ->nullable()
+                        ->options(Typeformation::all()->pluck('title', 'id')->toArray())
                         ->label('Type de formation')
-                        ->relationship('typeformation', 'title')
+                        // ->relationship('typeformation', 'title')
                         ->searchable()
                         ->placeholder('Type de formation')
                         ->columnSpan([
@@ -105,9 +108,10 @@ class FormationResource extends Resource
                         ]),
 
                     Select::make('accueilformation_id')
-                        ->rules(['exists:accueilformations,id'])
+                        // ->rules(['exists:accueilformations,id'])
                         ->nullable()
-                        ->relationship('accueilformation', 'title')
+                        ->options(Accueilformation::all()->pluck('title', 'id')->toArray())
+                        // ->relationship('accueilformation', 'title')
                         ->searchable()
                         ->placeholder('Accueilformation')
                         ->columnSpan([

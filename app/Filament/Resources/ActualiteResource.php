@@ -3,18 +3,20 @@
 namespace App\Filament\Resources;
 
 use App\Models\Actualite;
+use App\Models\Typeformation;
 use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use App\Filament\Filters\DateRangeFilter;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Filters\DateRangeFilter;
+use Filament\Resources\{Form, Table, Resource};
 use App\Filament\Resources\ActualiteResource\Pages;
+use App\Models\Accueilactu;
 
 class ActualiteResource extends Resource
 {
@@ -123,9 +125,10 @@ class ActualiteResource extends Resource
                         ]),
 
                     Select::make('typeformation_id')
-                        ->rules(['exists:typeformations,id'])
+                        // ->rules(['exists:typeformations,id'])
                         ->nullable()
-                        ->relationship('typeformation', 'title')
+                        // ->relationship('typeformation', 'title')
+                        ->options(Typeformation::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Typeformation')
                         ->columnSpan([
@@ -135,9 +138,10 @@ class ActualiteResource extends Resource
                         ]),
 
                     Select::make('accueilactu_id')
-                        ->rules(['exists:accueilactus,id'])
+                        // ->rules(['exists:accueilactus,id'])
                         ->nullable()
-                        ->relationship('accueilactu', 'title')
+                        // ->relationship('accueilactu', 'title')
+                        ->options(Accueilactu::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Accueilactu')
                         ->columnSpan([

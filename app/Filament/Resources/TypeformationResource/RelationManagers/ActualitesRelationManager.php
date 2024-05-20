@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\TypeformationResource\RelationManagers;
 
+use App\Models\Accueilactu;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\{Form, Table};
@@ -109,8 +110,9 @@ class ActualitesRelationManager extends RelationManager
                     ]),
 
                 Select::make('accueilactu_id')
-                    ->rules(['exists:accueilactus,id'])
-                    ->relationship('accueilactu', 'title')
+                    // ->rules(['exists:accueilactus,id'])
+                    // ->relationship('accueilactu', 'title')
+                    ->options(Accueilactu::all()->pluck('title', 'id')->toArray())
                     ->searchable()
                     ->placeholder('Accueilactu')
                     ->columnSpan([
