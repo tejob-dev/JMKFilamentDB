@@ -386,7 +386,7 @@ $lienfooters = App\Models\Lienfooter::get();
                         <div class="content-box">
                             <h2>{!! renderHtml($slide->title) !!}</h2>
                             <div class="lower-box">
-                                <div class="icon-box"><i class="{{ $slide->icone }}"></i></div>
+                                <!-- <div class="icon-box"><i class="{{ $slide->icone }}"></i></div> -->
                                 <div class="text">{!! renderHtml($slide->soustitle) !!}</div>
                                 <a href="{{ $slide->boutonlien }}" class="theme-btn btn-two">{{ $slide->boutontitre }}</a>
                             </div>
