@@ -15,13 +15,16 @@ use App\Filament\Resources\AccueiltemoinResource\Pages;
 
 class AccueiltemoinResource extends Resource
 {
+
+    protected static ?string $label = "Témoignages";
+
     protected static ?string $model = Accueiltemoin::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'SECTION ACCUEIL';
+    protected static ?string $navigationGroup = 'LES SECTIONS';
 
     public static function form(Form $form): Form
     {

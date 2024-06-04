@@ -18,13 +18,16 @@ use App\Models\Accueilclient;
 
 class AccueilclientitemResource extends Resource
 {
+
+    protected static ?string $label = 'Clients';
+
     protected static ?string $model = Accueilclientitem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'ENTITES DU SITE';
+    protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
 
     public static function form(Form $form): Form
     {

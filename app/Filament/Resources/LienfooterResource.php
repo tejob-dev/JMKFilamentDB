@@ -14,13 +14,16 @@ use App\Filament\Resources\LienfooterResource\Pages;
 
 class LienfooterResource extends Resource
 {
+
+    protected static ?string $label = 'Lien pieds de page';
+
     protected static ?string $model = Lienfooter::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'titre';
 
-    protected static ?string $navigationGroup = 'PAGE DU SITE';
+    protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
 
     public static function form(Form $form): Form
     {

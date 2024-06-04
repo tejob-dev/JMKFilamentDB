@@ -15,13 +15,16 @@ use App\Filament\Resources\AccueilmanagerResource\Pages;
 
 class AccueilmanagerResource extends Resource
 {
+
+    protected static ?string $label = "Direction JMK ";
+
     protected static ?string $model = Accueilmanager::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'SECTION ACCUEIL';
+    protected static ?string $navigationGroup = 'LES SECTIONS';
 
     public static function form(Form $form): Form
     {

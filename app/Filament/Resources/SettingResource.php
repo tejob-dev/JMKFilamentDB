@@ -15,6 +15,9 @@ use Filament\Forms\Components\RichEditor;
 
 class SettingResource extends Resource
 {
+
+    protected static ?string $label = "Paramètres";
+
     protected static ?string $model = Setting::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';

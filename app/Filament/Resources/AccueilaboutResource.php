@@ -15,11 +15,14 @@ use App\Filament\Resources\AccueilaboutResource\Pages;
 
 class AccueilaboutResource extends Resource
 {
+
+    protected static ?string $label = "A Propos";
+
     protected static ?string $model = Accueilabout::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
-    protected static ?string $navigationGroup = 'SECTION ACCUEIL';
+    protected static ?string $navigationGroup = 'LES SECTIONS';
 
     protected static ?string $recordTitleAttribute = 'title';
 

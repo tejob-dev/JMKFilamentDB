@@ -15,13 +15,16 @@ use App\Filament\Resources\TypeformationResource\Pages;
 
 class TypeformationResource extends Resource
 {
+
+    protected static ?string $label = "Types de formations";
+
     protected static ?string $model = Typeformation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'TYPE DE DONNEES';
+    protected static ?string $navigationGroup = 'LES DONNEES';
 
     public static function form(Form $form): Form
     {

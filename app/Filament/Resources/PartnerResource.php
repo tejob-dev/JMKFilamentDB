@@ -15,13 +15,16 @@ use App\Filament\Resources\PartnerResource\Pages;
 
 class PartnerResource extends Resource
 {
+
+    protected static ?string $label = 'Parténaires';
+
     protected static ?string $model = Partner::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'imagetitle';
 
-    protected static ?string $navigationGroup = 'PAGE DU SITE';
+    protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
 
     public static function form(Form $form): Form
     {

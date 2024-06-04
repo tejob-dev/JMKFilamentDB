@@ -16,13 +16,16 @@ use App\Filament\Resources\SlideResource\Pages;
 
 class SlideResource extends Resource
 {
+
+    protected static ?string $label = "Images Défilantes";
+
     protected static ?string $model = Slide::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'SECTION ACCUEIL';
+    protected static ?string $navigationGroup = 'LES SECTIONS';
 
     public static function form(Form $form): Form
     {

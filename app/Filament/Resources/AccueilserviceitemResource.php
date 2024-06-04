@@ -17,13 +17,16 @@ use App\Models\Accueilservice;
 
 class AccueilserviceitemResource extends Resource
 {
+
+    protected static ?string $label = 'Services';
+
     protected static ?string $model = Accueilserviceitem::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'ENTITES DU SITE';
+    protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
 
     public static function form(Form $form): Form
     {

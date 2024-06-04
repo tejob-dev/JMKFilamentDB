@@ -15,13 +15,16 @@ use App\Filament\Resources\AccueilformationResource\Pages;
 
 class AccueilformationResource extends Resource
 {
+
+    protected static ?string $label = "Formations";
+
     protected static ?string $model = Accueilformation::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'SECTION ACCUEIL';
+    protected static ?string $navigationGroup = 'LES SECTIONS';
 
     public static function form(Form $form): Form
     {

@@ -20,13 +20,16 @@ use App\Models\Accueilactu;
 
 class ActualiteResource extends Resource
 {
+
+    protected static ?string $label = 'Actualités';
+
     protected static ?string $model = Actualite::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
 
-    protected static ?string $navigationGroup = 'PAGE DU SITE';
+    protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
 
     public static function form(Form $form): Form
     {
