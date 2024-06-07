@@ -381,7 +381,7 @@ $lienfooters = App\Models\Lienfooter::get();
             <div class="banner-carousel owl-theme owl-carousel">
                 @foreach($slides as $slide)
                 <div class="slide-item">
-                    <div class="image-layer" style="background-image:url({{ Storage::url($slide->image) }})"></div>
+                    <div class="image-layer" style="background-image:url({{ Storage::url($slide->image) }}); height:820px;"></div>
                     <div class="auto-container">
                         <div class="content-box">
                             <h2>{!! renderHtml($slide->title) !!}</h2>

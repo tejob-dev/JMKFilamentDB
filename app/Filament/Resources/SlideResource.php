@@ -53,7 +53,7 @@ class SlideResource extends Resource
                         ]),
 
                     FileUpload::make('image')
-                        ->rules(['image', 'max:1024'])
+                        ->rules(['image', 'max:10240'])
                         ->nullable()
                         ->image()
                         ->placeholder('Image')
