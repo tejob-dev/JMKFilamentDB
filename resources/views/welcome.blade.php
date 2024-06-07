@@ -50,6 +50,7 @@ $lienfooters = App\Models\Lienfooter::get();
     <link href="css/color.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <link href="css/responsive.css" rel="stylesheet">
+    <link href="css/icon_advancs_font.css" rel="stylesheet">
 
     <link href="css/custom.css" rel="stylesheet">
 
@@ -239,17 +240,32 @@ $lienfooters = App\Models\Lienfooter::get();
                                 <div class="collapse navbar-collapse show clearfix" style="display: flex!important; flex-direction: row;" id="navbarSupportedContent">
 
                                     <ul class="navigation clearfix">
-                                        <li class="current"><a href="/">Accueil</a>
-                                        </li>
-                                        <li class="dropdown"><a href="#">A Propos</a>
+                                        <li class="current dropdown">
+                                            <div class="">
+                                                <span class="ag-advans_globe icon"></span>
+                                                <a href="/">Nous découvrir</a>
+                                            </div>
                                             <ul>
-                                                <li><a href="presentation.html">Présentation</a></li>
-                                                <li><a href="equipe.html">Notre équipe</a></li>
-                                                <li><a href="approche.html">Notre approche</a></li>
+                                                <li><a href="presentation.html">Notre mission</a></li>
+                                                <li><a href="equipe.html">Notre vision</a></li>
+                                                <li><a href="approche.html">Nos valeurs</a></li>
+                                                <li><a href="approche.html">Notre equipe</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <div class="">
+                                                    <span class="ag-advans_profil icon"></span>
+                                                    <a href="#">Notre métier</a>
+                                            </div>
+                                            <ul>
+                                                <li><a href="presentation.html">Nos services</a></li>
+                                                <li><a href="equipe.html">Nos produits</a></li>
+                                                <li><a href="approche.html">Notre impact</a></li>
+                                                <li><a href="approche.html">Nos projets/activités</a></li>
                                             </ul>
                                             <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
                                         </li>
-                                        <li class="dropdown"><a href="#">Services</a>
+                                        <!-- <li class="dropdown"><a href="#">Services</a>
                                             <ul>
                                                 <li><a href="services-detail-agriculture.html">Négoce de matière première</a></li>
                                                 <li class="dropdown"><a href="#">Environnement &amp; foresterie</a>
@@ -274,16 +290,45 @@ $lienfooters = App\Models\Lienfooter::get();
                                                 <li><a href="service-detail-import.html">Import et export</a></li>
                                             </ul>
                                             <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-                                        </li>
-                                        <li class="dropdown"><a href="#">Nos produits</a>
+                                        </li> -->
+                                        <li class="dropdown">
+                                            <div class="">
+                                                    <span class="ag-advans_aboutus icon"></span>
+                                                    <a href="#">Carrière</a>
+                                            </div>
                                             <ul>
-                                                <li><a href="#agrotransparence.html">Agro Transparence</a></li>
-                                                <li><a href="#fieldconnect.html">FieldConnect</a></li>
-                                                <li><a href="#geniebio.html">ONG GénieBio</a></li>
+                                                <li><a href="#agrotransparence.html">Notre culture</a></li>
+                                                <li><a href="#agrotransparence.html">Nos opportunités</a></li>
+                                                <li><a href="#agrotransparence.html">Nous réjoindre</a></li>
                                             </ul>
                                             <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
                                         </li>
-                                        <li><a href="actualites.html">Actualités</a></li>
+                                        <li class="dropdown">
+                                            <div class="">
+                                                    <span class="ag-advans_media icon"></span>
+                                                    <a href="#">Media</a>
+                                            </div>
+                                            <ul>
+                                                <li><a href="#agrotransparence.html">Actualités</a></li>
+                                                <li><a href="#agrotransparence.html">Publications</a></li>
+                                                <li><a href="#agrotransparence.html">Vidéos</a></li>
+                                                <li><a href="#agrotransparence.html">Vidéos</a></li>
+                                            </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+                                        </li>
+                                        <li class="dropdown">
+                                            <div class="">
+                                                    <span class="ag-advans_team icon"></span>
+                                                    <a href="#">Consortium</a>
+                                            </div>
+                                            <ul>
+                                                <li><a href="#agrotransparence.html">JMK</a></li>
+                                                <li><a href="#agrotransparence.html">Génie Bio</a></li>
+                                                <li><a href="#agrotransparence.html">Sicadevd</a></li>
+                                            </ul>
+                                            <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
+                                        </li>
+                                        <!-- <li><a href="actualites.html">Actualités</a></li> -->
                                     </ul>
                                 </div>
                             </nav>

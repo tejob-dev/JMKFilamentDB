@@ -294,7 +294,7 @@ h1,h2,h3,h4,h5,h6{
   border-top-color: rgba(255, 255, 255, 0.5); 
 }
 
-/* AnimaciÃƒÂ³n del preloader */
+/* AnimaciÃƒÆ’Ã‚Â³n del preloader */
 @keyframes spinner {
   to {
     transform: rotateZ(360deg);
@@ -1001,7 +1001,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 4px 20px;
+  padding: 18px 20px;
 }
 
 
@@ -1364,7 +1364,7 @@ img {
   position:relative;
   display:block;
   text-align:center;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 26px;
   padding: 10px 0px;
   padding-left: 25px;
@@ -1372,6 +1372,54 @@ img {
   font-family: 'Urbanist', sans-serif;
   opacity:1;
   color: #272e39;
+  z-index:1;
+  text-transform: uppercase;
+  /* text-transform: capitalize; */
+  -webkit-transition:all 500ms ease;
+  -moz-transition:all 500ms ease;
+  -ms-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+  transition:all 500ms ease;
+}
+
+.main-menu .navigation > li > div{
+  display: flex;
+}
+
+.main-menu .navigation > li > div > a{
+  position:relative;
+  display:block;
+  text-align:center;
+  font-size: 18px;
+  line-height: 26px;
+  padding: 10px 0px;
+  padding-left: 10px;
+  font-weight: 700;
+  font-family: 'Urbanist', sans-serif;
+  opacity:1;
+  color: #272e39;
+  z-index:1;
+  text-transform: uppercase;
+  /* text-transform: capitalize; */
+  -webkit-transition:all 500ms ease;
+  -moz-transition:all 500ms ease;
+  -ms-transition:all 500ms ease;
+  -o-transition:all 500ms ease;
+  transition:all 500ms ease;
+}
+
+.main-menu .navigation > li > div > span{
+  position:relative;
+  display:block;
+  text-align:center;
+  font-size: 26px;
+  line-height: 26px;
+  padding: 10px 0px;
+  padding-left: 10px;
+  font-weight: 700;
+  font-family: 'Urbanist', sans-serif;
+  opacity:1;
+  color: #bb7e2c;
   z-index:1;
   text-transform: uppercase;
   /* text-transform: capitalize; */
@@ -1462,7 +1510,7 @@ img {
   display:block;
   line-height:24px;
   font-weight:400;
-  font-size: 14px;
+  font-size: 18px;
   font-family: 'Urbanist', sans-serif;
   color:#75727b;
   text-align: left;
@@ -16087,7 +16135,7 @@ div#mCSB_1_container{
 body > div > header > div.sticky-header > div > div > div.menu-right-content.right-column > div.phone > h3,
 body > div > header > div.header-lower > div > div > div.menu-right-content.right-column > div.phone > h3 {
   display: block;
-  font-size: 15px;
+  font-size: 18px;
   line-height: 30px;
   font-weight: 500;
 }
@@ -16105,4 +16153,8 @@ body > div > header > div.sticky-header > div > div > div.menu-right-content.rig
 
 body > div > section.banner-section > div > div.owl-stage-outer > div > div{
   height: 58vh;
+}
+
+body > div > header > div.header-lower > div > div > div.menu-area > figure > a > img{
+  width: 249px;
 }
