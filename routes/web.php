@@ -24,6 +24,7 @@ use App\Http\Controllers\AccueilformationController;
 use App\Http\Controllers\AccueilclientitemController;
 use App\Http\Controllers\AccueilmanageritemController;
 use App\Http\Controllers\AccueilserviceitemController;
+use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ use App\Http\Controllers\AccueilserviceitemController;
 Route::get('/', function () {
     return view('welcome');
 });
+        
+Route::get('/nos-services.html', [FrontendController::class, 'services']);
+Route::get('/services/{slug}', [FrontendController::class, 'services']);
 
 Route::prefix('/')
     ->middleware('auth')
