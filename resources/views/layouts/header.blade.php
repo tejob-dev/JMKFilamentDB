@@ -258,7 +258,7 @@ $setting = App\Models\Setting::first();
                                 </li>
                                 <li class="dropdown">
                                     <div class="">
-                                            <span class="ag-advans_team icon"></span>
+                                            <span class="newicon newicon-farmer-1"></span>
                                             <a href="#">Consortium</a>
                                     </div>
                                     <ul>

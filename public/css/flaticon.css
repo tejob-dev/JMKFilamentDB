@@ -1,5 +1,6 @@
 @font-face {
     font-family: "flaticon";
+    src: url("../fonts/flaticon2.woff2") format("woff2");
     src: url("../fonts/flaticon.ttf") format("truetype"),
 url("../fonts/flaticon.woff") format("woff"),
 url("../fonts/flaticon.woff2") format("woff2"),
@@ -17,6 +18,8 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+
 
 .flaticon-headphone:before {
     content: "\f101";
