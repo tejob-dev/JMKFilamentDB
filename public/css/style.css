@@ -373,7 +373,7 @@ img {
   vertical-align: middle;
   font-size: 15px;
   line-height: 20px;
-  font-weight: 600;
+  font-weight: 400;
   letter-spacing: -1px;
   font-family: 'Ubuntu', sans-serif;
   text-align: center;
@@ -1394,12 +1394,12 @@ img {
   position:relative;
   display:block;
   text-align:center;
-  font-size: 18px;
+  font-size: 13px;
   line-height: 26px;
   padding: 10px 0px;
   padding-left: 10px;
   font-weight: 400;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   font-family: 'Ubuntu', sans-serif;
   opacity:1;
   color: #272e39;
@@ -1515,8 +1515,8 @@ img {
   display:block;
   line-height:24px;
   font-weight:400;
-  font-size: 18px;
-  letter-spacing: -1px;
+  font-size: 13px;
+  letter-spacing: 0px;
   font-family: 'Ubuntu', sans-serif;
   color:#75727b;
   text-align: left;
@@ -2201,11 +2201,11 @@ div#mCSB_1_container{
 .banner-carousel .content-box p{
   position: relative;
   display: block;
-  font-size: 22px;
-  letter-spacing: -1px;
+  font-size: 18px;
+  letter-spacing: 0px;
   font-family: 'Ubuntu', sans-serif;
   line-height: 29px;
-  font-weight: 700;
+  font-weight: 300;
   color: #fcfdfc;
   margin-bottom: 40px;
   opacity: 0;
