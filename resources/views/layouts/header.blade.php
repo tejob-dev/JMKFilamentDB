@@ -155,7 +155,7 @@ $setting = App\Models\Setting::first();
             </ul>
             <ul class="social-links clearfix">
                 <li>
-                    <h5>Envoyer un Email: {{($setting->email_site)}}</h5>
+                    <h5>{{($setting->contact_site)}} | {{($setting->email_site)}}</h5>
                 </li>
                 {!! renderHtml($setting->list_social) !!}
             </ul>
@@ -274,10 +274,7 @@ $setting = App\Models\Setting::first();
                     </nav>
                 </div>
                 <div class="menu-right-content right-column">
-                    <div class="phone">
-                        <h3><a href="tel:{{str_replace(' ', '', $setting->contact_site)}}">{{($setting->contact_site)}}</a></h3>
-                    </div>
-                    <div class="btn-box"><a href="contact.html" class="theme-btn btn-one">Contactez-nous</a></div>
+                    <div class="btn-box"><a href="{{($setting->lien_contact)}}" class="theme-btn btn-one">Contactez-nous</a></div>
                     <div class="search-box">
                     </div>
                     <div class="language-box" style="padding-left: 30px;">
@@ -307,10 +304,7 @@ $setting = App\Models\Setting::first();
                     </nav>
                 </div>
                 <div class="menu-right-content right-column">
-                    <div class="phone">
-                        <h3><a href="tel:{{str_replace(' ', '', $setting->contact_site)}}">{{($setting->contact_site)}}</a></h3>
-                    </div>
-                    <div class="btn-box"><a href="contact.html" class="theme-btn btn-one">Contactez-nous</a></div>
+                    <div class="btn-box"><a href="{{($setting->lien_contact)}}" class="theme-btn btn-one">Contactez-nous</a></div>
                     <div class="search-box">
                         <!-- <div class="search-box-outer search-toggler" style="padding-left: 20px;">
                             &nbsp;<img src="img/icon-2.png" alt="">

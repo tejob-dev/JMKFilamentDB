@@ -42,7 +42,9 @@
 
 **********************************************/
 
-
+@charset "UTF-8";@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i|Ubuntu:300,300i,400,400i,500,500i,700,700i);.tx-go-maps-ext img {
+  max-width: none;
+}
 
 /*** 
 
@@ -372,8 +374,8 @@ img {
   font-size: 15px;
   line-height: 20px;
   font-weight: 600;
-  /* font-family: 'Urbanist', sans-serif; */
-  font-family: "Oswald", sans-serif;
+  letter-spacing: -1px;
+  font-family: 'Ubuntu', sans-serif;
   text-align: center;
   padding: 12px 33px;
   text-transform: capitalize;
@@ -1095,7 +1097,8 @@ img {
   display: inline-block;
   font-size: 18px;
   line-height: 28px;
-  font-family: 'Urbanist', sans-serif;
+  letter-spacing: -1px;
+  font-family: 'Ubuntu', sans-serif;
   color: #75727b;
   padding-right: 20px;
   padding-left: 0px;
@@ -1395,8 +1398,9 @@ img {
   line-height: 26px;
   padding: 10px 0px;
   padding-left: 10px;
-  font-weight: 700;
-  font-family: 'Urbanist', sans-serif;
+  font-weight: 400;
+  letter-spacing: -1px;
+  font-family: 'Ubuntu', sans-serif;
   opacity:1;
   color: #272e39;
   z-index:1;
@@ -1512,7 +1516,8 @@ img {
   line-height:24px;
   font-weight:400;
   font-size: 18px;
-  font-family: 'Urbanist', sans-serif;
+  letter-spacing: -1px;
+  font-family: 'Ubuntu', sans-serif;
   color:#75727b;
   text-align: left;
   padding: 14px 0px;
@@ -2155,7 +2160,7 @@ div#mCSB_1_container{
   line-height: 70px;
   font-weight: 700;
   color: #bb7e2c;
-  margin-bottom: 67px;
+  margin-top: 67px;
   opacity: 0;
   -webkit-transform: translateY(10px);
   -moz-transform: translateY(10px);
@@ -2197,7 +2202,8 @@ div#mCSB_1_container{
   position: relative;
   display: block;
   font-size: 22px;
-  font-family: "Oswald", sans-serif;
+  letter-spacing: -1px;
+  font-family: 'Ubuntu', sans-serif;
   line-height: 29px;
   font-weight: 700;
   color: #fcfdfc;
@@ -16163,4 +16169,18 @@ body > div > section.banner-section > div > div.owl-stage-outer > div > div{
 
 body > div > header > div.header-lower > div > div > div.menu-area > figure > a > img{
   width: 249px;
+}
+
+/* PUT TRANSPARENCE ON BANNER */
+
+body > div > section.banner-section > div > div.owl-stage-outer > div > div.owl-item.active > div > div.image-layer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(0 0 0 / 35%); /* Adjust the opacity as needed */
+  z-index: 1; /* Ensure the overlay appears above the image */
+  pointer-events: none; /* Ensure the overlay doesn't interfere with interactions */
 }
