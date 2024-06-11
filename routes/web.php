@@ -43,6 +43,7 @@ Route::get('/', function () {
         
 Route::get('/nos-services.html', [FrontendController::class, 'services']);
 Route::get('/services/{slug}', [FrontendController::class, 'services']);
+Route::get('/make/preview/{cid}/{cname}', [FrontendController::class, 'makePreview']);
 
 Route::prefix('/')
     ->middleware('auth')

@@ -134,10 +134,11 @@ class ContentViewResource extends Resource
         ]);
     }
 
-    protected function getTableQuery(): Builder
-    {
-        return parent::getTableQuery()->orderBy("title", "asc");
-    }
+    // protected function getTableQuery(): Builder
+    // {
+    //     dd(parent::getTableQuery()->filteredList()->toSql())
+    //     return parent::getTableQuery()->filteredList();
+    // }
 
     public static function table(Table $table): Table
     {
@@ -148,6 +149,11 @@ class ContentViewResource extends Resource
                     ->label('Titre')
                     ->toggleable()
                     ->sortable()
+                    ->searchable(true, null, true)
+                    ->limit(50),
+                Tables\Columns\TextColumn::make('content_viewable.title')
+                    ->label('Titre de page')
+                    ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
                 Tables\Columns\TextColumn::make('content_viewable_type')
@@ -169,9 +175,11 @@ class ContentViewResource extends Resource
                     ->label('Type de contenu')
                     ->toggleable()
                     ->limit(50),
+                    
                 ViewColumn::make('open_url')
                     ->label('')
                     ->view('vendor.filament.components.copy-url-button'),
+
                 // Tables\Columns\TextColumn::make('content_viewable_type')
                 //     ->toggleable()
                 //     ->searchable(true, null, true)

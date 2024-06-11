@@ -14,7 +14,11 @@ class FrontendController extends Controller
 
         if($slug){
 
-            $view  = View::make('frontend.services.index', compact('slug'));
+            $slugid = Accueilserviceitem::where("slug", "=", str_replace(".html", "", $slug))->first()?->id??null;
+
+            if(!$slugid) return redirect('/');
+
+            $view  = View::make('frontend.services.index', ['slug' => $slugid]);
     
             return $view;
         }else{
@@ -22,7 +26,7 @@ class FrontendController extends Controller
             $firstservice = Accueilserviceitem::first();
 
             if($firstservice){
-                $view  = View::make('frontend.services.index', ['slug' => $firstservice->slug]);
+                $view  = View::make('frontend.services.index', ['slug' => $firstservice->id]);
     
                 return $view;
             }
@@ -30,6 +34,28 @@ class FrontendController extends Controller
         }
 
         return redirect('/');
+
+    }
+    
+    public function makePreview($cid = null, $cname = null){
+
+        if(!$cid) return redirect('/administration');
+
+        if($cname){
+
+            if($cname == "Accueilserviceitem"){
+                $slug = $cid;
+                $view  = View::make('frontend.services.index', compact('slug'));
+        
+                return $view;
+            }elseif($cname == "Accueilclientitem"){
+
+                return redirect('/administration');
+            }
+
+        }
+
+        return redirect('/administration');
 
     }
 

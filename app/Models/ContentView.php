@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Scopes\Searchable;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,7 +26,8 @@ class ContentView extends Model
         static::addGlobalScope(function (Builder $builder) {
             // Add your global scope filtering logic here
             // For example:
-            $builder->orderBy("title", "asc");
+            // if(URL::getRequest()->getPathInfo() == "/administration/content-views")
+            //     $builder->with("contentViewType")->leftJoin("content_view_types", "content_views.content_view_type_id", "=", "content_view_types.id")->orderBy("content_viewable_type", "asc")->orderBy("content_view_types.title", "asc");
         });
     }
 
