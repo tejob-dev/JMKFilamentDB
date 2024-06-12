@@ -296,7 +296,7 @@ h1,h2,h3,h4,h5,h6{
   border-top-color: rgba(255, 255, 255, 0.5); 
 }
 
-/* AnimaciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n del preloader */
+/* AnimaciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n del preloader */
 @keyframes spinner {
   to {
     transform: rotateZ(360deg);
@@ -12950,7 +12950,7 @@ div#mCSB_1_container{
 
 .page-title{
   position: relative;
-  padding: 185px 0px 32px 0px;
+  padding: 120px 0px 32px 0px;
 }
 
 .page-title .bg-layer{
@@ -12978,8 +12978,8 @@ div#mCSB_1_container{
 .page-title h1{
   position: relative;
   display: block;
-  font-size: 72px;
-  line-height: 80px;
+  font-size: 48px;
+  line-height: 42px;
   color: #fff;
   font-weight: 600;
   text-align: center;
@@ -13480,7 +13480,7 @@ div#mCSB_1_container{
   top: 0px;
   right: 0px;
   width: 60px;
-  height: 60px;
+  height: 100%;
   line-height: 64px;
   font-size: 20px;
   color: #a09ba9;

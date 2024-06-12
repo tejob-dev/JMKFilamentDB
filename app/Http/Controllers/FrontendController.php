@@ -14,8 +14,12 @@ class FrontendController extends Controller
 
         if($slug){
 
-            $slugid = Accueilserviceitem::where("slug", "=", str_replace(".html", "", $slug))->first()?->id??null;
-
+            $allservices = Accueilserviceitem::get();
+            $itemfit = $allservices->filter(function ($item) use($slug) {
+                return preg_match("/$slug/i",formatSlug($item->title, "services/", ".html")) == true ;
+            });
+            $slugid = $itemfit?->first()->id??null;
+            // dd($slug, $itemfit);
             if(!$slugid) return redirect('/');
 
             $view  = View::make('frontend.services.index', ['slug' => $slugid]);

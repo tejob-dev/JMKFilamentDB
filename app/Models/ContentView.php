@@ -40,4 +40,5 @@ class ContentView extends Model
     {
         return $this->morphTo();
     }
+
 }

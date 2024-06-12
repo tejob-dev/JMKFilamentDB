@@ -2,18 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Accueilserviceitem;
 use Filament\{Tables, Forms};
-use Filament\Resources\{Form, Table, Resource};
-use Filament\Forms\Components\Grid;
+use App\Models\Accueilservice;
+use App\Models\Accueilserviceitem;
 use Filament\Forms\Components\Card;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TextInput;
+use App\Filament\Filters\DateRangeFilter;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
-use App\Filament\Filters\DateRangeFilter;
+use Filament\Resources\{Form, Table, Resource};
 use App\Filament\Resources\AccueilserviceitemResource\Pages;
-use App\Models\Accueilservice;
 
 class AccueilserviceitemResource extends Resource
 {
@@ -34,6 +35,7 @@ class AccueilserviceitemResource extends Resource
             Card::make()->schema([
                 Grid::make(['default' => 0])->schema([
                     TextInput::make('title')
+                        ->label("Titre")
                         ->rules(['max:255', 'string'])
                         ->required()
                         ->placeholder('Title')
@@ -44,6 +46,7 @@ class AccueilserviceitemResource extends Resource
                         ]),
 
                     RichEditor::make('text')
+                        ->label("Descriptions")
                         ->rules(['max:255', 'string'])
                         ->nullable()
                         ->placeholder('Text')
@@ -54,6 +57,7 @@ class AccueilserviceitemResource extends Resource
                         ]),
 
                     RichEditor::make('subservice')
+                        ->label("Autres descriptions")
                         ->rules(['max:255', 'string'])
                         ->nullable()
                         ->placeholder('Subservice')
@@ -64,6 +68,7 @@ class AccueilserviceitemResource extends Resource
                         ]),
 
                     TextInput::make('boutontitre')
+                        ->label("Titre de bouton")
                         ->rules(['max:255', 'string'])
                         ->nullable()
                         ->placeholder('Boutontitre')
@@ -74,6 +79,7 @@ class AccueilserviceitemResource extends Resource
                         ]),
 
                     TextInput::make('boutonlien')
+                        ->label("Lien de page/lien bouton")
                         ->rules(['max:255', 'string'])
                         ->nullable()
                         ->placeholder('Boutonlien')
@@ -84,6 +90,7 @@ class AccueilserviceitemResource extends Resource
                         ]),
 
                     Select::make('accueilservice_id')
+                        ->label("Section de page rattaché")
                         // ->rules(['exists:accueilservices,id'])
                         ->nullable()
                         // ->relationship('accueilservice', 'title')
@@ -128,6 +135,9 @@ class AccueilserviceitemResource extends Resource
                 Tables\Columns\TextColumn::make('accueilservice.title')
                     ->toggleable()
                     ->limit(50),
+                ViewColumn::make('open_url')
+                    ->label('')
+                    ->view('vendor.filament.components.copy-slug-button'),
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),
@@ -142,7 +152,9 @@ class AccueilserviceitemResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            AccueilserviceitemResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

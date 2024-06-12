@@ -41,8 +41,12 @@ Route::get('/', function () {
     return view('welcome');
 });
         
+Route::get('/{slug}.html', [FrontendController::class, 'buttonpage']);
+
 Route::get('/nos-services.html', [FrontendController::class, 'services']);
 Route::get('/services/{slug}', [FrontendController::class, 'services']);
+
+//PREVIEW ALL PAGES
 Route::get('/make/preview/{cid}/{cname}', [FrontendController::class, 'makePreview']);
 
 Route::prefix('/')
