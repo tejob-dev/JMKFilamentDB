@@ -249,4 +249,66 @@
             </div>
         </div>
     </div>
+    <script>
+            // Assuming you have a way to get the content for each CompositeView
+            if(typeof compositeViewContents !== 'undefined'){
+                console.log(compositeViewContents);
+    
+                // document.addEventListener('DOMContentLoaded', function () {
+                //     const selectField = document.getElementById('composite_view_id');
+                //     const textAreaField = document.getElementById('content');
+                    
+                //     if(selectField != null){
+    
+                //         selectField.addEventListener('change', function () {
+                //             const selectedId = selectField.value;
+                //             const content = compositeViewContents[selectedId] || '';
+                //             textAreaField.value = content;
+                //         });
+                //     }else{
+                //     }
+                //     });
+                console.log("Select est definit !")
+
+            }else{
+                function transformString(input) {
+                    // Split the input string by commas
+                    const elements = input.split(',');
+
+                    // Transform each element into the desired format
+                    const transformedElements = elements.map(element => `${element}: ""`);
+
+                    // Join the transformed elements with commas and add a trailing comma
+                    const result = transformedElements.join(',\n') + ',';
+
+                    return result;
+                }
+
+                const compositeViewContents = {
+                    @foreach(App\Models\CompositeView::all() as $compositeView)
+                        {{ $compositeView->id }}: @json([$compositeView->required, asset(\Storage::url($compositeView->image))]),
+                    @endforeach
+                };
+                console.log(compositeViewContents);
+    
+                document.addEventListener('DOMContentLoaded', function () {
+                    const selectField = document.getElementById('composite_view_id');
+                    const textAreaField = document.getElementById('content');
+                    
+                    if(selectField != null){
+    
+                        selectField.addEventListener('change', function () {
+                            const selectedId = selectField.value;
+                            const content = compositeViewContents[selectedId] || '';
+                            // textAreaField.value = content;
+                            // console.log(content)
+                            // console.log(content[0])
+                            textAreaField.value = transformString(content[0]);
+                        });
+                    }else{
+                        console.log("Select non definit !")
+                    }
+                });
+            }
+    </script>
 </div>

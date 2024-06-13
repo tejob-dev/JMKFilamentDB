@@ -8,6 +8,7 @@ use App\Models\Accueilserviceitem;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Filters\DateRangeFilter;
@@ -45,11 +46,29 @@ class AccueilserviceitemResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    RichEditor::make('text')
+                    Textarea::make('text')
                         ->label("Descriptions")
                         ->rules(['max:255', 'string'])
                         ->nullable()
                         ->placeholder('Text')
+                        // ->toolbarButtons([
+                        //     'bold',
+                        //     'italic',
+                        //     'underline',
+                        //     'strike',
+                        //     'heading',
+                        //     'subheading',
+                        //     'blockquote',
+                        //     'code',
+                        //     'link',
+                        //     'list',
+                        //     'orderedList',
+                        //     'unorderedList',
+                        //     'horizontalRule',
+                        //     'table',
+                        //     'media',
+                        //     'source',
+                        // ])
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,

@@ -2,6 +2,8 @@
 
 function renderHtml($content){
     //$setting->list_social
+    // $content = str_replace('<strong>', '', str_replace('</strong>', '', $content));
+    // $content = str_replace('&nbsp;', '', $content);
     return html_entity_decode(htmlspecialchars_decode(str_replace('<pre>', '', str_replace('</pre>', '', $content))));
 }
 

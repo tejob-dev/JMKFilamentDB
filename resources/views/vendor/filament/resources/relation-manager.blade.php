@@ -4,4 +4,5 @@
     {{ $this->table }}
 
     {{ \Filament\Facades\Filament::renderHook('resource.relation-manager.end') }}
+
 </div>

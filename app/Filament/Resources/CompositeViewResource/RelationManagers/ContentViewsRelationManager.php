@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AccueilserviceitemResource\RelationManagers;
+namespace App\Filament\Resources\CompositeViewResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -12,7 +12,6 @@ use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Select;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use Illuminate\Database\Eloquent\Builder;
@@ -24,14 +23,9 @@ use Filament\Resources\RelationManagers\RelationManager;
 
 class ContentViewsRelationManager extends RelationManager
 {
-
-    protected static ?string $title = 'Contenus de pages';
-
     protected static string $relationship = 'contentViews';
 
     protected static ?string $recordTitleAttribute = 'title';
-
-    protected static bool $shouldRegisterNavigation = false;
 
     public static function form(Form $form): Form
     {
@@ -102,43 +96,25 @@ class ContentViewsRelationManager extends RelationManager
                         ]),
 
                     MorphToSelect::make("content_viewable")
-                    ->label("Type de contenu")
-                    // ->extraAttributes(['class' => 'bg-gray-50'])
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 9,
-                        'lg' => 9,
-                    ])
-                    ->types(
-                        [
-                            Type::make(Accueilserviceitem::class)
-                            ->label("Les services")
-                            ->titleColumnName("title"),
-                            Type::make(Accueilclientitem::class)
-                            ->label("Les clients")
-                            ->titleColumnName("title"),
-                        ]
-                    )
-                    ->searchable()
-                    ->preload(),
-
-                // TextInput::make('content_viewable_id')
-                //     ->rules(['max:255'])
-                //     ->placeholder('Content Viewable Id')
-                //     ->columnSpan([
-                //         'default' => 12,
-                //         'md' => 12,
-                //         'lg' => 12,
-                //     ]),
-
-                // TextInput::make('content_viewable_type')
-                //     ->rules(['max:255', 'string'])
-                //     ->placeholder('Content Viewable Type')
-                //     ->columnSpan([
-                //         'default' => 12,
-                //         'md' => 12,
-                //         'lg' => 12,
-                //     ]),
+                        ->label("Type de contenu")
+                        // ->extraAttributes(['class' => 'bg-gray-50'])
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 9,
+                            'lg' => 9,
+                        ])
+                        ->types(
+                            [
+                                Type::make(Accueilserviceitem::class)
+                                ->label("Les services")
+                                ->titleColumnName("title"),
+                                Type::make(Accueilclientitem::class)
+                                ->label("Les clients")
+                                ->titleColumnName("title"),
+                            ]
+                        )
+                        ->searchable()
+                        ->preload(),
             ]),
         ]);
     }
@@ -147,42 +123,19 @@ class ContentViewsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Titre')
-                    ->toggleable()
-                    ->sortable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('content_viewable.title')
-                    ->label('Titre de page')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('content_viewable_type')
-                    ->label('Contenu appartenant à')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('content')
-                    ->label('Le contenu')
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('priority')
-                    ->label('La position')
-                    ->sortable()
-                    ->toggleable(),
-                    // ->searchable(true, null, true),
-                Tables\Columns\TextColumn::make('contentViewType.title')
-                    ->label('Type de contenu')
-                    ->toggleable()
-                    ->limit(50),
-                    
-                ViewColumn::make('open_url')
-                    ->label('')
-                    ->view('vendor.filament.components.copy-url-button'),
+                Tables\Columns\TextColumn::make('title')->limit(50),
+                Tables\Columns\TextColumn::make('content')->limit(50),
+                Tables\Columns\TextColumn::make('priority'),
+                Tables\Columns\TextColumn::make('contentViewType.title')->limit(
+                    50
+                ),
+                Tables\Columns\TextColumn::make('content_viewable_id')->limit(
+                    50
+                ),
+                Tables\Columns\TextColumn::make('content_viewable_type')->limit(
+                    50
+                ),
             ])
-            ->defaultSort("content_viewable_type")
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

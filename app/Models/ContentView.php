@@ -41,4 +41,8 @@ class ContentView extends Model
         return $this->morphTo();
     }
 
+    public function compositeView()
+    {
+        return $this->belongsTo(CompositeView::class);
+    }
 }

@@ -2,7 +2,7 @@
     <div>
         <div class="flex items-center">
             @if($getRecord()->file)
-                <a class="flex" href="#" onclick="copyUrlToClipboard('{{ asset(\Storage::url($getRecord()->file)) }}')" class="text-indigo-600 hover:text-indigo-900">
+                <a class="flex" href="#" onclick="copyUrlToClipboard('{{ asset(\Storage::url($getRecord()->file)) }}'); event.preventDefault();" class="text-indigo-600 hover:text-indigo-900">
                     <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                             viewBox="0 0 503.607 503.607" xml:space="preserve">
                         <g transform="translate(1 1)">
@@ -55,7 +55,7 @@
                 </a>
             @endif
             @if($getRecord()->photo)
-                <a class="flex" href="#" onclick="copyUrlToClipboard('{{ asset(\Storage::url($getRecord()->photo)) }}')" class="text-indigo-600 hover:text-indigo-900">
+                <a class="flex" href="#" onclick="copyUrlToClipboard('{{ asset(\Storage::url($getRecord()->photo)) }}'); event.preventDefault();" class="text-indigo-600 hover:text-indigo-900">
                     <svg fill="#000000" height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                             viewBox="0 0 503.607 503.607" xml:space="preserve">
                         <g transform="translate(1 1)">

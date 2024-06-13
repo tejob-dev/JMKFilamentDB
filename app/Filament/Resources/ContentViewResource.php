@@ -3,13 +3,17 @@
 namespace App\Filament\Resources;
 
 use App\Models\ContentView;
+use App\Models\CompositeView;
 use Filament\{Tables, Forms};
 use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
 use App\Models\Accueilserviceitem;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\Html;
+use Filament\Forms\Components\View;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TextInput;
 use App\Filament\Filters\DateRangeFilter;
@@ -57,9 +61,34 @@ class ContentViewResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    RichEditor::make('content')
+                        
+                    Select::make('composite_view_id')
+                        ->label("Vue composante")
+                        // ->rules(['exists:accueilservices,id'])
+                        ->nullable()
+                        // ->relationship('accueilservice', 'title')
+
+                        ->id('composite_view_id')
+                        ->options(CompositeView::all()->pluck('title', 'id')->toArray())
+                        ->searchable()
+                        ->placeholder('Vue composante')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]), 
+                        
+                    View::make('vendor.filament.components.dynamic-image')
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
+
+                    Textarea::make('content')
                         ->rules(['string'])
                         ->required()
+                        ->id('content')
                         ->label('Le contenu')
                         ->placeholder('Le contenu')
                         ->columnSpan([

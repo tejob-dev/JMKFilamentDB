@@ -173,6 +173,52 @@
             </script>
         @endif
 
+        <script>
+            // Assuming you have a way to get the content for each CompositeView
+            function transformString(input) {
+                // Split the input string by commas
+                const elements = input.split(',');
+
+                // Transform each element into the desired format
+                const transformedElements = elements.map(element => `${element}: ""`);
+
+                // Join the transformed elements with commas and add a trailing comma
+                const result = transformedElements.join(',\n') + ',';
+
+                return result;
+            }
+            
+            const compositeViewContents = {
+                @foreach(App\Models\CompositeView::all() as $compositeView)
+                    {{ $compositeView->id }}: @json([$compositeView->required, asset(\Storage::url($compositeView->image))]),
+                @endforeach
+            };
+            console.log(compositeViewContents);
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const selectField = document.getElementById('composite_view_id');
+                const textAreaField = document.getElementById('content');
+                var dynamicImageElement = document.getElementById('dynamicImage');
+                
+                if(selectField != null){
+
+                    selectField.addEventListener('change', function () {
+                        const selectedId = selectField.value;
+                        const content = compositeViewContents[selectedId] || '';
+                        // console.log(content)
+                        // console.log(content[0])
+                        textAreaField.value = transformString(content[0]);
+                        if (dynamicImageElement) {
+                            dynamicImageElement.src = content[1];
+                        }
+                    });
+                }else{
+                    //SCRIPT 1
+                    console.log("Select non definit !")
+                }
+            });
+        </script>
+
         @foreach (\Filament\Facades\Filament::getScripts() as $name => $path)
             @if (\Illuminate\Support\Str::of($path)->startsWith(['http://', 'https://']))
                 <script defer src="{{ $path }}"></script>
