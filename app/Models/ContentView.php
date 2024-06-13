@@ -27,7 +27,7 @@ class ContentView extends Model
             // Add your global scope filtering logic here
             // For example:
             // if(URL::getRequest()->getPathInfo() == "/administration/content-views")
-            //     $builder->with("contentViewType")->leftJoin("content_view_types", "content_views.content_view_type_id", "=", "content_view_types.id")->orderBy("content_viewable_type", "asc")->orderBy("content_view_types.title", "asc");
+            // $builder->with("content_viewable");
         });
     }
 

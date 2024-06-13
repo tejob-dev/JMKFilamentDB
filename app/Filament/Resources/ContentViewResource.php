@@ -69,6 +69,7 @@ class ContentViewResource extends Resource
                         // ->relationship('accueilservice', 'title')
 
                         ->id('composite_view_id')
+                        ->extraAttributes(['class' => 'composite_view_class'])
                         ->options(CompositeView::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Vue composante')
@@ -79,6 +80,7 @@ class ContentViewResource extends Resource
                         ]), 
                         
                     View::make('vendor.filament.components.dynamic-image')
+                        ->extraAttributes(['class' => 'dynamic_image_class'])
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -89,6 +91,7 @@ class ContentViewResource extends Resource
                         ->rules(['string'])
                         ->required()
                         ->id('content')
+                        ->extraAttributes(['class' => 'content_class'])
                         ->label('Le contenu')
                         ->placeholder('Le contenu')
                         ->columnSpan([
@@ -191,11 +194,11 @@ class ContentViewResource extends Resource
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
-                Tables\Columns\TextColumn::make('content_viewable_type')
-                    ->label('Contenu appartenant à')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
+                // Tables\Columns\TextColumn::make('content_viewable_type')
+                //     ->label('Contenu appartenant à')
+                //     ->toggleable()
+                //     ->searchable(true, null, true)
+                //     ->limit(50),
                 Tables\Columns\TextColumn::make('content')
                     ->label('Le contenu')
                     ->toggleable()

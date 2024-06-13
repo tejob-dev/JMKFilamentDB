@@ -106,6 +106,11 @@
         {{ \Filament\Facades\Filament::renderHook('head.end') }}
     </head>
 
+    <!-- <script id="my-component-view" type="text/javascript">
+            
+
+        </script> -->
+
     <body
         @class([
             'filament-body min-h-screen overflow-y-auto bg-gray-100 text-gray-900',
@@ -174,49 +179,83 @@
         @endif
 
         <script>
-            // Assuming you have a way to get the content for each CompositeView
+        document.addEventListener('DOMContentLoaded', function () {
+            Livewire.hook('message.processed', (message, component) => {
+                const modalElement = document.querySelector('[wire\\:id] .filament-modal'); // Adjust the selector based on your modal's class
+                if (modalElement && modalElement.style.display !== 'none') {
+                    executeOnModalOpen();
+                }
+            });
+        });
+
+        function executeOnModalOpen() {
+            // Your custom JavaScript code here
+            // var scriptTag = document.getElementById('my-component-view');
+            // if (scriptTag) {
+            //     // Get the content of the script tag
+            //     const scriptContent = scriptTag.textContent || scriptTag.innerText;
+            //     // Execute the script content
+            //     eval(scriptContent);
+            // } else {
+            //     console.log('Script tag with ID "my-component-view" not found.');
+            // }
+
+// Assuming you have a way to get the content for each CompositeView
             function transformString(input) {
                 // Split the input string by commas
-                const elements = input.split(',');
+                console.log(input);
+                if(typeof input !== 'undefined'){
 
-                // Transform each element into the desired format
-                const transformedElements = elements.map(element => `${element}: ""`);
+                    const elements = input.split(',');
+    
+                    // Transform each element into the desired format
+                    const transformedElements = elements.map(element => `   ${element}: ""`);
+    
+                    // Join the transformed elements with commas and add a trailing comma
+                    const result = "[\n {\n"+transformedElements.join(',\n') + ','+"\n},\n]";
+    
+                    return result;
+                }
 
-                // Join the transformed elements with commas and add a trailing comma
-                const result = transformedElements.join(',\n') + ',';
-
-                return result;
+                return "Erreur survénue !"
             }
             
-            const compositeViewContents = {
+            var compositeViewContents = {
                 @foreach(App\Models\CompositeView::all() as $compositeView)
                     {{ $compositeView->id }}: @json([$compositeView->required, asset(\Storage::url($compositeView->image))]),
                 @endforeach
             };
             console.log(compositeViewContents);
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const selectField = document.getElementById('composite_view_id');
-                const textAreaField = document.getElementById('content');
-                var dynamicImageElement = document.getElementById('dynamicImage');
-                
-                if(selectField != null){
+            const selectFields = document.querySelectorAll('.composite_view_class');
+            const textAreaFields = document.querySelectorAll('.content_class');
+            const dynamicImageElements = document.querySelectorAll('.dynamic_image_class');
 
-                    selectField.addEventListener('change', function () {
-                        const selectedId = selectField.value;
+            if (selectFields.length > 0) {
+                selectFields.forEach((selectField, index) => {
+                    selectField.addEventListener('change', function (event) {
+                        console.log(textAreaFields, dynamicImageElements);
+                        const selectedId = event.target.value;
                         const content = compositeViewContents[selectedId] || '';
-                        // console.log(content)
-                        // console.log(content[0])
-                        textAreaField.value = transformString(content[0]);
+                        
+                        const textAreaField = textAreaFields[index];// selectField.closest('.item').querySelector('.content_class');
+                        const dynamicImageElement = dynamicImageElements[index];// selectField.closest('.item').querySelector('.dynamic_image_class');
+                        
+                        if (textAreaField) {
+                            textAreaField.value = transformString(content[0]);
+                        }
                         if (dynamicImageElement) {
                             dynamicImageElement.src = content[1];
                         }
                     });
-                }else{
-                    //SCRIPT 1
-                    console.log("Select non definit !")
-                }
-            });
+                });
+            } else {
+                // SCRIPT 1
+                console.log("Select non definit !");
+            }
+
+            console.log('Modal is opened!');
+        }
         </script>
 
         @foreach (\Filament\Facades\Filament::getScripts() as $name => $path)

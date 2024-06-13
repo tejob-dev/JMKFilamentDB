@@ -109,7 +109,7 @@
             @endif
 
             @if($getRecord()->content)
-                <a class="flex" href="{{ asset('/make/preview/'.$getRecord()?->content_viewable_id.'/'.explode('\\',$getRecord()?->content_viewable_type)[2]) }}" target="_blank" class="text-indigo-600 hover:text-indigo-900">
+                <a class="flex" href="#" onclick="window.open('{{ asset('/make/preview/'.$getRecord()?->content_viewable_id.'/'.explode('\\',$getRecord()?->content_viewable_type)[2]) }}', '_blank'); event.preventDefault();" class="text-indigo-600 hover:text-indigo-900">
                     <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
                         width="20px" height="20px" viewBox="0 0 92 92" enable-background="new 0 0 92 92" xml:space="preserve">
                         <path id="XMLID_1239_" d="M91.3,43.8C90.6,42.8,74.4,19,46,19C17.6,19,1.4,42.8,0.7,43.8c-0.9,1.3-0.9,3.1,0,4.5

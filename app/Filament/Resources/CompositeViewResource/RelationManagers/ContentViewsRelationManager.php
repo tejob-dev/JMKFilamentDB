@@ -9,6 +9,7 @@ use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
 use App\Models\Accueilserviceitem;
 use Filament\Forms\Components\Grid;
+use Filament\Forms\Components\View;
 use Filament\Forms\Components\Select;
 use Filament\Resources\{Form, Table};
 use Filament\Forms\Components\Textarea;
@@ -43,23 +44,36 @@ class ContentViewsRelationManager extends RelationManager
                         ]),
 
                         
-                    Select::make('composite_view_id')
+                        Select::make('composite_view_id')
                         ->label("Vue composante")
                         // ->rules(['exists:accueilservices,id'])
                         ->nullable()
                         // ->relationship('accueilservice', 'title')
+
+                        ->id('composite_view_id')
+                        ->extraAttributes(['class' => 'composite_view_class'])
                         ->options(CompositeView::all()->pluck('title', 'id')->toArray())
                         ->searchable()
-                        // ->placeholder('Accueilservice')
+                        ->placeholder('Vue composante')
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
-                        ]),   
+                        ]), 
+                        
+                    View::make('vendor.filament.components.dynamic-image')
+                        ->extraAttributes(['class' => 'dynamic_image_class'])
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
 
                     Textarea::make('content')
                         ->rules(['string'])
                         ->required()
+                        ->id('content')
+                        ->extraAttributes(['class' => 'content_class'])
                         ->label('Le contenu')
                         ->placeholder('Le contenu')
                         ->columnSpan([
@@ -96,25 +110,25 @@ class ContentViewsRelationManager extends RelationManager
                         ]),
 
                     MorphToSelect::make("content_viewable")
-                        ->label("Type de contenu")
-                        // ->extraAttributes(['class' => 'bg-gray-50'])
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 9,
-                            'lg' => 9,
-                        ])
-                        ->types(
-                            [
-                                Type::make(Accueilserviceitem::class)
-                                ->label("Les services")
-                                ->titleColumnName("title"),
-                                Type::make(Accueilclientitem::class)
-                                ->label("Les clients")
-                                ->titleColumnName("title"),
-                            ]
-                        )
-                        ->searchable()
-                        ->preload(),
+                    ->label("Type de contenu")
+                    // ->extraAttributes(['class' => 'bg-gray-50'])
+                    ->columnSpan([
+                        'default' => 12,
+                        'md' => 9,
+                        'lg' => 9,
+                    ])
+                    ->types(
+                        [
+                            Type::make(Accueilserviceitem::class)
+                            ->label("Les services")
+                            ->titleColumnName("title"),
+                            Type::make(Accueilclientitem::class)
+                            ->label("Les clients")
+                            ->titleColumnName("title"),
+                        ]
+                    )
+                    ->searchable()
+                    ->preload(),
             ]),
         ]);
     }
