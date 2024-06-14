@@ -46,55 +46,57 @@ $bodys = $listContent->filter(function ($contentView) {
 
             
             $ItContent = $banniere?->content;
-            $mycompo = App\Models\CompositeView::find($banniere->composite_view_id);
-            $compositeBanniereContent = $mycompo->content;
-            $compositeBanniereRequiredList = formatRequiredTextList($mycompo->required);
-            $compositeBanniereRequiredListSimple = formatRequiredTextList($mycompo->required, true);
+            $mycompo = App\Models\CompositeView::find($banniere?->composite_view_id);
+            $compositeBanniereContent = $mycompo?->content;
             
             
-            
-            if(preg_match("/\{content\}/i", $compositeBanniereContent) == true){
-                $content = explode(";", $compositeBanniereContent)[0];
-                $content2 = explode(";", $compositeBanniereContent)[1];
-                $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
-                //dd($items);
-                $newContent = "";
-                $newContentList = [];
-                foreach ($items as $item) {
-                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                        $newContent = str_replace(
-                            "{".$compositeBanniereRequiredListIt."}",
-                            $item[$compositeBanniereRequiredListSimple[$key]],
-                            $content2
-                        );
+            if($mycompo){
+                $compositeBanniereRequiredList = formatRequiredTextList($mycompo?->required);
+                $compositeBanniereRequiredListSimple = formatRequiredTextList($mycompo?->required, true);
+
+                if(preg_match("/\{content\}/i", $compositeBanniereContent) == true){
+                    $content = explode(";", $compositeBanniereContent)[0];
+                    $content2 = explode(";", $compositeBanniereContent)[1];
+                    $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                    //dd($items);
+                    $newContent = "";
+                    $newContentList = [];
+                    foreach ($items as $item) {
+                        foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                            $newContent = str_replace(
+                                "{".$compositeBanniereRequiredListIt."}",
+                                $item[$compositeBanniereRequiredListSimple[$key]],
+                                $content2
+                            );
+                        }
+                        $newContentList[] = $newContent;
                     }
-                    $newContentList[] = $newContent;
-                }
-                $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
-                foreach ($items as $item) {
-                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                        $lastContent = str_replace(
-                            "{".$compositeBanniereRequiredListIt."}",
-                            $item[$compositeBanniereRequiredListSimple[$key]],
-                            $lastContent
-                        );
+                    $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
+                    foreach ($items as $item) {
+                        foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                            $lastContent = str_replace(
+                                "{".$compositeBanniereRequiredListIt."}",
+                                $item[$compositeBanniereRequiredListSimple[$key]],
+                                $lastContent
+                            );
+                        }
+                        
                     }
-                    
-                }
-                echo renderHtml($lastContent);
-            }else{
-                $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
-                foreach ($items as $item) {
-                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                        $compositeBanniereContent = str_replace(
-                            "{".$compositeBanniereRequiredListIt."}",
-                            $item[$compositeBanniereRequiredListSimple[$key]],
-                            $compositeBanniereContent
-                        );
+                    echo renderHtml($lastContent);
+                }else{
+                    $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                    foreach ($items as $item) {
+                        foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                            $compositeBanniereContent = str_replace(
+                                "{".$compositeBanniereRequiredListIt."}",
+                                $item[$compositeBanniereRequiredListSimple[$key]],
+                                $compositeBanniereContent
+                            );
+                        }
+                        
                     }
-                    
+                    echo renderHtml($compositeBanniereContent);
                 }
-                echo renderHtml($compositeBanniereContent);
             }
         @endphp
         <!-- page-title end -->
@@ -111,12 +113,77 @@ $bodys = $listContent->filter(function ($contentView) {
                 
                                         $ItContent = $bodyIt?->content;
                                         $mycompo = App\Models\CompositeView::find($bodyIt->composite_view_id);
-                                        $compositeBanniereContent = $mycompo->content;
-                                        $compositeBanniereRequiredList = formatRequiredTextList($mycompo->required);
-                                        $compositeBanniereRequiredListSimple = formatRequiredTextList($mycompo->required, true);
+                                        $compositeBanniereContent = $mycompo?->content;
                                         
                                         
+                                        if($mycompo){
+                                            $compositeBanniereRequiredList = formatRequiredTextList($mycompo?->required);
+                                            $compositeBanniereRequiredListSimple = formatRequiredTextList($mycompo?->required, true);
+
+                                            if(preg_match("/\{content\}/i", $compositeBanniereContent) == true){
+                                                $content = explode(";", $compositeBanniereContent)[0];
+                                                $content2 = explode(";", $compositeBanniereContent)[1];
+                                                $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                                                //dd($items);
+                                                $newContent = "";
+                                                $newContentList = [];
+                                                foreach ($items as $item) {
+                                                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                                                        $newContent = str_replace(
+                                                            "{".$compositeBanniereRequiredListIt."}",
+                                                            $item[$compositeBanniereRequiredListSimple[$key]],
+                                                            $content2
+                                                        );
+                                                    }
+                                                    $newContentList[] = $newContent;
+                                                }
+                                                $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
+                                                foreach ($items as $item) {
+                                                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                                                        $lastContent = str_replace(
+                                                            "{".$compositeBanniereRequiredListIt."}",
+                                                            $item[$compositeBanniereRequiredListSimple[$key]],
+                                                            $lastContent
+                                                        );
+                                                    }
+                                                    
+                                                }
+                                                echo renderHtml($lastContent);
+                                            }else{
+                                                $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                                                foreach ($items as $item) {
+                                                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                                                        $compositeBanniereContent = str_replace(
+                                                            "{".$compositeBanniereRequiredListIt."}",
+                                                            $item[$compositeBanniereRequiredListSimple[$key]],
+                                                            $compositeBanniereContent
+                                                        );
+                                                    }
+                                                    
+                                                }
+                                                echo renderHtml($compositeBanniereContent);
+                                            }
+                                        }
                                         
+                                    
+                                @endphp
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
+                        <div class="service-sidebar">
+                            @php 
+                                foreach($sidebars as $sidebarIt){
+            
+                                    $ItContent = $sidebarIt?->content;
+                                    $mycompo = App\Models\CompositeView::find($sidebarIt->composite_view_id);
+                                    $compositeBanniereContent = $mycompo?->content;
+                                    
+                                    
+                                    if($mycompo){
+                                        $compositeBanniereRequiredList = formatRequiredTextList($mycompo?->required);
+                                        $compositeBanniereRequiredListSimple = formatRequiredTextList($mycompo?->required, true);
+
                                         if(preg_match("/\{content\}/i", $compositeBanniereContent) == true){
                                             $content = explode(";", $compositeBanniereContent)[0];
                                             $content2 = explode(";", $compositeBanniereContent)[1];
@@ -160,70 +227,8 @@ $bodys = $listContent->filter(function ($contentView) {
                                             }
                                             echo renderHtml($compositeBanniereContent);
                                         }
-                                        
-                                    
-                                @endphp
-                            @endforeach
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12 col-sm-12 sidebar-side">
-                        <div class="service-sidebar">
-                            @php 
-                                foreach($sidebars as $sidebarIt){
-            
-                                    $ItContent = $sidebarIt?->content;
-                                    $mycompo = App\Models\CompositeView::find($sidebarIt->composite_view_id);
-                                    $compositeBanniereContent = $mycompo->content;
-                                    $compositeBanniereRequiredList = formatRequiredTextList($mycompo->required);
-                                    $compositeBanniereRequiredListSimple = formatRequiredTextList($mycompo->required, true);
-                                    
-                                    
-                                    
-                                    if(preg_match("/\{content\}/i", $compositeBanniereContent) == true){
-                                        $content = explode(";", $compositeBanniereContent)[0];
-                                        $content2 = explode(";", $compositeBanniereContent)[1];
-                                        $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
-                                        //dd($items);
-                                        $newContent = "";
-                                        $newContentList = [];
-                                        foreach ($items as $item) {
-                                            foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                                                $newContent = str_replace(
-                                                    "{".$compositeBanniereRequiredListIt."}",
-                                                    $item[$compositeBanniereRequiredListSimple[$key]],
-                                                    $content2
-                                                );
-                                            }
-                                            $newContentList[] = $newContent;
-                                        }
-                                        $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
-                                        foreach ($items as $item) {
-                                            foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                                                $lastContent = str_replace(
-                                                    "{".$compositeBanniereRequiredListIt."}",
-                                                    $item[$compositeBanniereRequiredListSimple[$key]],
-                                                    $lastContent
-                                                );
-                                            }
-                                            
-                                        }
-                                        echo renderHtml($lastContent);
-                                    }else{
-                                        $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
-                                        foreach ($items as $item) {
-                                            foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                                                $compositeBanniereContent = str_replace(
-                                                    "{".$compositeBanniereRequiredListIt."}",
-                                                    $item[$compositeBanniereRequiredListSimple[$key]],
-                                                    $compositeBanniereContent
-                                                );
-                                            }
-                                            
-                                        }
-                                        echo renderHtml($compositeBanniereContent);
                                     }
-                                    
-                                } 
+                                }
                             @endphp
                         </div>
                     </div>
