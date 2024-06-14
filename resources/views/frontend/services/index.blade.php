@@ -57,18 +57,31 @@ $bodys = $listContent->filter(function ($contentView) {
                 $content = explode(";", $compositeBanniereContent)[0];
                 $content2 = explode(";", $compositeBanniereContent)[1];
                 $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                //dd($items);
                 $newContent = "";
+                $newContentList = [];
                 foreach ($items as $item) {
                     foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                        $newContent .= str_replace(
+                        $newContent = str_replace(
                             "{".$compositeBanniereRequiredListIt."}",
                             $item[$compositeBanniereRequiredListSimple[$key]],
                             $content2
-                        )."\n";
+                        );
+                    }
+                    $newContentList[] = $newContent;
+                }
+                $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
+                foreach ($items as $item) {
+                    foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                        $lastContent = str_replace(
+                            "{".$compositeBanniereRequiredListIt."}",
+                            $item[$compositeBanniereRequiredListSimple[$key]],
+                            $lastContent
+                        );
                     }
                     
                 }
-                echo renderHtml(str_replace("{content}",$newContent,$content));
+                echo renderHtml($lastContent);
             }else{
                 $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
                 foreach ($items as $item) {
@@ -108,18 +121,31 @@ $bodys = $listContent->filter(function ($contentView) {
                                             $content = explode(";", $compositeBanniereContent)[0];
                                             $content2 = explode(";", $compositeBanniereContent)[1];
                                             $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                                            //dd($items);
                                             $newContent = "";
+                                            $newContentList = [];
                                             foreach ($items as $item) {
                                                 foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                                                    $newContent .= str_replace(
+                                                    $newContent = str_replace(
                                                         "{".$compositeBanniereRequiredListIt."}",
                                                         $item[$compositeBanniereRequiredListSimple[$key]],
                                                         $content2
-                                                    )."\n";
+                                                    );
+                                                }
+                                                $newContentList[] = $newContent;
+                                            }
+                                            $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
+                                            foreach ($items as $item) {
+                                                foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                                                    $lastContent = str_replace(
+                                                        "{".$compositeBanniereRequiredListIt."}",
+                                                        $item[$compositeBanniereRequiredListSimple[$key]],
+                                                        $lastContent
+                                                    );
                                                 }
                                                 
                                             }
-                                            echo renderHtml(str_replace("{content}",$newContent,$content));
+                                            echo renderHtml($lastContent);
                                         }else{
                                             $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
                                             foreach ($items as $item) {
@@ -157,18 +183,31 @@ $bodys = $listContent->filter(function ($contentView) {
                                         $content = explode(";", $compositeBanniereContent)[0];
                                         $content2 = explode(";", $compositeBanniereContent)[1];
                                         $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
+                                        //dd($items);
                                         $newContent = "";
+                                        $newContentList = [];
                                         foreach ($items as $item) {
                                             foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
-                                                $newContent .= str_replace(
+                                                $newContent = str_replace(
                                                     "{".$compositeBanniereRequiredListIt."}",
                                                     $item[$compositeBanniereRequiredListSimple[$key]],
                                                     $content2
-                                                )."\n";
+                                                );
+                                            }
+                                            $newContentList[] = $newContent;
+                                        }
+                                        $lastContent = str_replace("{content}",implode("\n", $newContentList),$content);
+                                        foreach ($items as $item) {
+                                            foreach($compositeBanniereRequiredList as $key=>$compositeBanniereRequiredListIt){
+                                                $lastContent = str_replace(
+                                                    "{".$compositeBanniereRequiredListIt."}",
+                                                    $item[$compositeBanniereRequiredListSimple[$key]],
+                                                    $lastContent
+                                                );
                                             }
                                             
                                         }
-                                        echo renderHtml(str_replace("{content}",$newContent,$content));
+                                        echo renderHtml($lastContent);
                                     }else{
                                         $items = json_decode(sanitizeJsonString($ItContent, $compositeBanniereRequiredListSimple), true);
                                         foreach ($items as $item) {
