@@ -16,6 +16,17 @@ function makeWordLikeId($content){
     return str_replace(" ", "", strtolower($content));
 }
 
+function formatRequiredTextList($content, $limit = false){
+    $compositeBanniereRequiredList = explode(",", $content);
+    if($limit) return $compositeBanniereRequiredList;
+
+    $replaceRequiredList = [];
+    foreach ($compositeBanniereRequiredList as $compositeBanniereRequired) {
+        $replaceRequiredList[] = "{$compositeBanniereRequired}";
+    }
+    return $replaceRequiredList;
+}
+
 function formatSlug($str, $prefix = null, $suffix = null) {
     // Convert the string to lowercase
     $str = strtolower($str);
@@ -64,4 +75,48 @@ function formatSlug($str, $prefix = null, $suffix = null) {
     $str = preg_replace('/\/\//', '/', $str);
 
     return $str;
+}
+
+function sanitizeJsonString($jsonString, $compositeBanniereRequiredListSimple) {
+    foreach(array_reverse($compositeBanniereRequiredListSimple) as $key=>$compositeBanniereRequiredListSimpleIt){
+        $jsonString = str_replace($compositeBanniereRequiredListSimpleIt.":", '"'.$compositeBanniereRequiredListSimpleIt.'":', $jsonString);
+    }
+    // Replace single quotes with double quotes
+    $jsonString = str_replace("\n", '', $jsonString);
+    removeSpaces($jsonString);
+    $jsonString = preg_replace('/,\s*([\]}])/m', '$1', $jsonString);
+    $jsonString = preg_replace('/"\[/', '[', $jsonString);
+    $jsonString = preg_replace('/\]"/', ']', $jsonString);
+    return ($jsonString);
+}
+
+function sanitizeJsonStringExt($jsonString) {
+    // Replace single quotes with double quotes
+    $jsonString = str_replace("'", '"', $jsonString);
+
+    // Remove trailing commas before closing braces and brackets
+    $jsonString = preg_replace('/,\s*([\]}])/m', '$1', $jsonString);
+
+    // Ensure special characters are properly escaped within strings
+    $jsonString = preg_replace_callback('/"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"/', function($matches) {
+        return '"' . addcslashes($matches[1], "\r\n\t\"\\") . '"';
+    }, $jsonString);
+
+    return $jsonString;
+}
+
+function removeSpaces(&$content) {
+    do {
+        $content = str_replace(' ', '', $content);
+    } while (preg_match("/\\s/", $content));
+}
+
+function removeSpacesFromArray(&$array) {
+    foreach ($array as &$value) {
+        if (is_array($value)) {
+            removeSpacesFromArray($value);
+        } else {
+            $value = str_replace(' ', '', $value);
+        }
+    }
 }

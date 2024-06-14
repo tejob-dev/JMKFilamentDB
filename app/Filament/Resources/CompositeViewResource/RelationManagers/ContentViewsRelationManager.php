@@ -140,9 +140,9 @@ class ContentViewsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('title')->limit(50),
                 Tables\Columns\TextColumn::make('content')->limit(50),
                 Tables\Columns\TextColumn::make('priority'),
-                Tables\Columns\TextColumn::make('contentViewType.title')->limit(
-                    50
-                ),
+                // Tables\Columns\TextColumn::make('contentViewType.title')->limit(
+                //     50
+                // ),
                 Tables\Columns\TextColumn::make('content_viewable_id')->limit(
                     50
                 ),
@@ -150,6 +150,7 @@ class ContentViewsRelationManager extends RelationManager
                     50
                 ),
             ])
+            ->defaultSort("content_viewable_type")
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([

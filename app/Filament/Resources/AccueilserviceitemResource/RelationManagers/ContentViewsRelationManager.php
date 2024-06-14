@@ -172,11 +172,11 @@ class ContentViewsRelationManager extends RelationManager
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
-                Tables\Columns\TextColumn::make('content_viewable_type')
-                    ->label('Contenu appartenant à')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
+                // Tables\Columns\TextColumn::make('content_viewable_type')
+                //     ->label('Contenu appartenant à')
+                //     ->toggleable()
+                //     ->searchable(true, null, true)
+                //     ->limit(50),
                 Tables\Columns\TextColumn::make('content')
                     ->label('Le contenu')
                     ->toggleable()
