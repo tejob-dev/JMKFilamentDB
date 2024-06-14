@@ -83,7 +83,7 @@ function sanitizeJsonString($jsonString, $compositeBanniereRequiredListSimple) {
     }
     // Replace single quotes with double quotes
     $jsonString = str_replace("\n", '', $jsonString);
-    removeSpaces($jsonString);
+    // removeSpaces($jsonString);
     $jsonString = preg_replace('/,\s*([\]}])/m', '$1', $jsonString);
     $jsonString = preg_replace('/"\[/', '[', $jsonString);
     $jsonString = preg_replace('/\]"/', ']', $jsonString);
