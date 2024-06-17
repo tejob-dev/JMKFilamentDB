@@ -19,4 +19,9 @@ class Accueilmanageritem extends Model
     {
         return $this->belongsTo(Accueilmanager::class);
     }
+
+    public function contentViews()
+    {
+        return $this->morphToMany(ContentView::class, 'content_viewable');
+    }
 }

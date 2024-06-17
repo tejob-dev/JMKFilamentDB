@@ -28,4 +28,9 @@ class Actualite extends Model
     {
         return $this->belongsTo(Accueilactu::class);
     }
+
+    public function contentViews()
+    {
+        return $this->morphToMany(ContentView::class, 'content_viewable');
+    }
 }

@@ -19,7 +19,6 @@ class CompositeView extends Model
 
     public function contentViews()
     {
-        return $this->hasMany(ContentView::class);
+        return $this->morphToMany(ContentView::class, 'content_viewable');
     }
-
 }

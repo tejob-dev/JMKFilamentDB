@@ -127,27 +127,6 @@ class ContentViewResource extends Resource
                             'lg' => 12,
                         ]),
 
-                    MorphToSelect::make("content_viewable")
-                    ->label("Type de contenu")
-                    // ->extraAttributes(['class' => 'bg-gray-50'])
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 9,
-                        'lg' => 9,
-                    ])
-                    ->types(
-                        [
-                            Type::make(Accueilserviceitem::class)
-                            ->label("Les services")
-                            ->titleColumnName("title"),
-                            Type::make(Accueilclientitem::class)
-                            ->label("Les clients")
-                            ->titleColumnName("title"),
-                        ]
-                    )
-                    ->searchable()
-                    ->preload(),
-
                     // TextInput::make('content_viewable_id')
                     //     ->rules(['max:255'])
                     //     ->required()
@@ -214,16 +193,16 @@ class ContentViewResource extends Resource
                     ->toggleable()
                     ->limit(50),
                     
-                ViewColumn::make('open_url')
-                    ->label('')
-                    ->view('vendor.filament.components.copy-url-button'),
+                // ViewColumn::make('open_url')
+                //     ->label('')
+                //     ->view('vendor.filament.components.copy-url-button'),
 
                 // Tables\Columns\TextColumn::make('content_viewable_type')
                 //     ->toggleable()
                 //     ->searchable(true, null, true)
                 //     ->limit(50),
             ])
-            ->defaultSort("content_viewable_type")
+            // ->defaultSort("content_viewable_type")
             // ->reorderable('title')
             ->filters([
                 // DateRangeFilter::make('created_at'),

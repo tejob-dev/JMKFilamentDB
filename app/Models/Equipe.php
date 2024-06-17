@@ -19,4 +19,9 @@ class Equipe extends Model
     {
         return $this->belongsTo(Accueiltemoin::class);
     }
+
+    public function contentViews()
+    {
+        return $this->morphToMany(ContentView::class, 'content_viewable');
+    }
 }

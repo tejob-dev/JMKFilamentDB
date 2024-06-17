@@ -36,9 +36,48 @@ class ContentView extends Model
         return $this->belongsTo(ContentViewType::class);
     }
 
-    public function content_viewable()
+    // public function content_viewable()
+    // {
+    //     return $this->morphTo();
+    // }
+
+    public function accueilserviceitems()
     {
-        return $this->morphTo();
+        return $this->morphedByMany(
+            Accueilserviceitem::class,
+            'content_viewable'
+        );
+    }
+
+    public function formations()
+    {
+        return $this->morphedByMany(Formation::class, 'content_viewable');
+    }
+
+    public function accueilmanageritems()
+    {
+        return $this->morphedByMany(
+            Accueilmanageritem::class,
+            'content_viewable'
+        );
+    }
+
+    public function accueilclientitems()
+    {
+        return $this->morphedByMany(
+            Accueilclientitem::class,
+            'content_viewable'
+        );
+    }
+
+    public function actualites()
+    {
+        return $this->morphedByMany(Actualite::class, 'content_viewable');
+    }
+
+    public function equipes()
+    {
+        return $this->morphedByMany(Equipe::class, 'content_viewable');
     }
 
     public function compositeView()

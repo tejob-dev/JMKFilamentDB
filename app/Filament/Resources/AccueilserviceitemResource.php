@@ -14,8 +14,11 @@ use Filament\Forms\Components\TextInput;
 use App\Filament\Filters\DateRangeFilter;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Forms\Components\MorphToSelect;
 use Filament\Resources\{Form, Table, Resource};
+use Filament\Forms\Components\MorphToSelect\Type;
 use App\Filament\Resources\AccueilserviceitemResource\Pages;
+use App\Models\ContentView;
 
 class AccueilserviceitemResource extends Resource
 {
@@ -121,6 +124,65 @@ class AccueilserviceitemResource extends Resource
                             'md' => 12,
                             'lg' => 12,
                         ]),
+
+                        
+
+                    // MorphToSelect::make("contentViews")
+                    // ->label("Type de contenu")
+                    // // ->extraAttributes(['class' => 'bg-gray-50'])
+                    // ->columnSpan([
+                    //     'default' => 12,
+                    //     'md' => 9,
+                    //     'lg' => 9,
+                    // ])
+                    // ->types(
+                    //     [
+                    //         Type::make(Accueilserviceitem::class)
+                    //         ->label("Les services")
+                    //         ->titleColumnName("title"),
+                    //     ]
+                    // )
+                    // ->searchable()
+                    // ->preload(),
+                    Forms\Components\Repeater::make('contentViews')
+                        // ->relationship()
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ])
+                        ->schema([
+                            // Select::make('accueilservice_id')
+                            //     ->label("Section du Contenu")
+                            //     // ->rules(['exists:accueilservices,id'])
+                            //     ->nullable()
+                            //     // ->relationship('accueilservice', 'title')
+                            //     ->options(Accueilservice::all()->pluck('title', 'id')->toArray())
+                            //     ->searchable()
+                            //     ->placeholder('Accueilservice')
+                            //     ->columnSpan([
+                            //         'default' => 12,
+                            //         'md' => 12,
+                            //         'lg' => 12,
+                            //     ]),
+                            // Add other fields as necessary
+                            Select::make('contentViews.id')
+                                ->label("Type de contenu")
+                                // ->rules(['exists:accueilservices,id'])
+                                ->nullable()
+                                // ->relationship('accueilservice', 'title')
+                                ->options(ContentView::all()->pluck('title', 'id')->toArray())
+                                ->searchable()
+                                // ->placeholder('Accueilservice')
+                                ->columnSpan([
+                                    'default' => 12,
+                                    'md' => 12,
+                                    'lg' => 12,
+                                ]),
+                        ])
+                        ->label('Type de contenu')
+                        ->columns(1)
+                        ->createItemButtonLabel('Ajouter'),
                 ]),
             ]),
         ]);

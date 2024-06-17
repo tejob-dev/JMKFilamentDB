@@ -19,4 +19,9 @@ class Accueilclientitem extends Model
     {
         return $this->belongsTo(Accueilclient::class);
     }
+
+    public function contentViews()
+    {
+        return $this->morphToMany(ContentView::class, 'content_viewable');
+    }
 }

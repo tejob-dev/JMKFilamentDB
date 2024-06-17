@@ -28,7 +28,7 @@ class ContentViewsRelationManager extends RelationManager
 
     protected static ?string $title = 'Contenus de pages';
 
-    protected static string $relationship = 'contentViews';
+    protected static string $relationship = 'content_viewables';
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -38,26 +38,14 @@ class ContentViewsRelationManager extends RelationManager
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
-                TextInput::make('title')
-                        ->rules(['max:255', 'string'])
-                        ->required()
-                        ->label('Titre')
-                        ->placeholder('Titre')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
-
-                        
-                        Select::make('composite_view_id')
+                    Select::make('content_view_id')
                         ->label("Vue composante")
                         // ->rules(['exists:accueilservices,id'])
                         ->nullable()
                         // ->relationship('accueilservice', 'title')
 
-                        ->id('composite_view_id')
-                        ->extraAttributes(['class' => 'composite_view_class'])
+                        // ->id('composite_view_id')
+                        // ->extraAttributes(['class' => 'composite_view_class'])
                         ->options(CompositeView::all()->pluck('title', 'id')->toArray())
                         ->searchable()
                         ->placeholder('Vue composante')
@@ -66,75 +54,6 @@ class ContentViewsRelationManager extends RelationManager
                             'md' => 12,
                             'lg' => 12,
                         ]), 
-                        
-                    View::make('vendor.filament.components.dynamic-image')
-                        ->extraAttributes(['class' => 'dynamic_image_class'])
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
-
-                    Textarea::make('content')
-                        ->rules(['string'])
-                        ->required()
-                        ->id('content')
-                        ->extraAttributes(['class' => 'content_class'])
-                        ->label('Le contenu')
-                        ->placeholder('Le contenu')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
-
-                    TextInput::make('priority')
-                        ->rules(['numeric'])
-                        ->required()
-                        ->numeric()
-                        ->label('La position')
-                        ->placeholder('La position')
-                        ->default('0')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
-
-                    Select::make('content_view_type_id')
-                        // ->rules(['exists:content_view_types,id'])
-                        ->required()
-                        // ->relationship('contentViewType', 'title')
-                        ->options(ContentViewType::all()->pluck('title', 'id')->toArray())
-                        ->searchable()
-                        ->label('Type de contenu')
-                        ->placeholder('Type de contenu')
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ]),
-
-                    MorphToSelect::make("content_viewable")
-                    ->label("Type de contenu")
-                    // ->extraAttributes(['class' => 'bg-gray-50'])
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 9,
-                        'lg' => 9,
-                    ])
-                    ->types(
-                        [
-                            Type::make(Accueilserviceitem::class)
-                            ->label("Les services")
-                            ->titleColumnName("title"),
-                            Type::make(Accueilclientitem::class)
-                            ->label("Les clients")
-                            ->titleColumnName("title"),
-                        ]
-                    )
-                    ->searchable()
-                    ->preload(),
 
                 // TextInput::make('content_viewable_id')
                 //     ->rules(['max:255'])
@@ -167,36 +86,7 @@ class ContentViewsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(true, null, true)
                     ->limit(50),
-                Tables\Columns\TextColumn::make('content_viewable.title')
-                    ->label('Titre de page')
-                    ->toggleable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
-                // Tables\Columns\TextColumn::make('content_viewable_type')
-                //     ->label('Contenu appartenant à')
-                //     ->toggleable()
-                //     ->searchable(true, null, true)
-                //     ->limit(50),
-                Tables\Columns\TextColumn::make('content')
-                    ->label('Le contenu')
-                    ->toggleable()
-                    ->searchable()
-                    ->limit(50),
-                Tables\Columns\TextColumn::make('priority')
-                    ->label('La position')
-                    ->sortable()
-                    ->toggleable(),
-                    // ->searchable(true, null, true),
-                Tables\Columns\TextColumn::make('contentViewType.title')
-                    ->label('Type de contenu')
-                    ->toggleable()
-                    ->limit(50),
-                    
-                ViewColumn::make('open_url')
-                    ->label('')
-                    ->view('vendor.filament.components.copy-url-button'),
             ])
-            ->defaultSort("content_viewable_type")
             ->filters([
                 Tables\Filters\Filter::make('created_at')
                     ->form([
@@ -228,11 +118,6 @@ class ContentViewsRelationManager extends RelationManager
                                 )
                             );
                     }),
-
-                MultiSelectFilter::make('content_view_type_id')->relationship(
-                    'contentViewType',
-                    'title'
-                ),
             ])
             ->headerActions([Tables\Actions\CreateAction::make()])
             ->actions([
