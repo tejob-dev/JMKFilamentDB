@@ -61,7 +61,6 @@ class ContentViewResource extends Resource
                             'lg' => 12,
                         ]),
 
-                        
                     Select::make('composite_view_id')
                         ->label("Vue composante")
                         // ->rules(['exists:accueilservices,id'])
@@ -217,7 +216,9 @@ class ContentViewResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            ContentViewResource\RelationManagers\ServicesItemRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

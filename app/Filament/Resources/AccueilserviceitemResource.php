@@ -54,24 +54,6 @@ class AccueilserviceitemResource extends Resource
                         ->rules(['max:255', 'string'])
                         ->nullable()
                         ->placeholder('Text')
-                        // ->toolbarButtons([
-                        //     'bold',
-                        //     'italic',
-                        //     'underline',
-                        //     'strike',
-                        //     'heading',
-                        //     'subheading',
-                        //     'blockquote',
-                        //     'code',
-                        //     'link',
-                        //     'list',
-                        //     'orderedList',
-                        //     'unorderedList',
-                        //     'horizontalRule',
-                        //     'table',
-                        //     'media',
-                        //     'source',
-                        // ])
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
@@ -124,65 +106,6 @@ class AccueilserviceitemResource extends Resource
                             'md' => 12,
                             'lg' => 12,
                         ]),
-
-                        
-
-                    // MorphToSelect::make("contentViews")
-                    // ->label("Type de contenu")
-                    // // ->extraAttributes(['class' => 'bg-gray-50'])
-                    // ->columnSpan([
-                    //     'default' => 12,
-                    //     'md' => 9,
-                    //     'lg' => 9,
-                    // ])
-                    // ->types(
-                    //     [
-                    //         Type::make(Accueilserviceitem::class)
-                    //         ->label("Les services")
-                    //         ->titleColumnName("title"),
-                    //     ]
-                    // )
-                    // ->searchable()
-                    // ->preload(),
-                    Forms\Components\Repeater::make('contentViews')
-                        // ->relationship()
-                        ->columnSpan([
-                            'default' => 12,
-                            'md' => 12,
-                            'lg' => 12,
-                        ])
-                        ->schema([
-                            // Select::make('accueilservice_id')
-                            //     ->label("Section du Contenu")
-                            //     // ->rules(['exists:accueilservices,id'])
-                            //     ->nullable()
-                            //     // ->relationship('accueilservice', 'title')
-                            //     ->options(Accueilservice::all()->pluck('title', 'id')->toArray())
-                            //     ->searchable()
-                            //     ->placeholder('Accueilservice')
-                            //     ->columnSpan([
-                            //         'default' => 12,
-                            //         'md' => 12,
-                            //         'lg' => 12,
-                            //     ]),
-                            // Add other fields as necessary
-                            Select::make('contentViews.id')
-                                ->label("Type de contenu")
-                                // ->rules(['exists:accueilservices,id'])
-                                ->nullable()
-                                // ->relationship('accueilservice', 'title')
-                                ->options(ContentView::all()->pluck('title', 'id')->toArray())
-                                ->searchable()
-                                // ->placeholder('Accueilservice')
-                                ->columnSpan([
-                                    'default' => 12,
-                                    'md' => 12,
-                                    'lg' => 12,
-                                ]),
-                        ])
-                        ->label('Type de contenu')
-                        ->columns(1)
-                        ->createItemButtonLabel('Ajouter'),
                 ]),
             ]),
         ]);
