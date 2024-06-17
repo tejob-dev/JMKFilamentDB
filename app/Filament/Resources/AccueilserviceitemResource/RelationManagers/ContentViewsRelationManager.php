@@ -4,6 +4,7 @@ namespace App\Filament\Resources\AccueilserviceitemResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
+use App\Models\ContentView;
 use App\Models\CompositeView;
 use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
@@ -28,7 +29,9 @@ class ContentViewsRelationManager extends RelationManager
 
     protected static ?string $title = 'Contenus de pages';
 
-    protected static string $relationship = 'content_viewables';
+    protected static string $relationship = 'contentViews';
+    
+    // protected static ?string $model = Accueilserviceitem::class;
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -38,40 +41,32 @@ class ContentViewsRelationManager extends RelationManager
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
-                    Select::make('content_view_id')
-                        ->label("Vue composante")
-                        // ->rules(['exists:accueilservices,id'])
-                        ->nullable()
-                        // ->relationship('accueilservice', 'title')
 
-                        // ->id('composite_view_id')
-                        // ->extraAttributes(['class' => 'composite_view_class'])
-                        ->options(CompositeView::all()->pluck('title', 'id')->toArray())
-                        ->searchable()
-                        ->placeholder('Vue composante')
+                    Forms\Components\Select::make('content_view_id')
+                        ->label('Contenue de la page')
+                        ->options(ContentView::all()->pluck('title', 'id')->toArray())
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
-                        ]), 
-
-                // TextInput::make('content_viewable_id')
-                //     ->rules(['max:255'])
-                //     ->placeholder('Content Viewable Id')
-                //     ->columnSpan([
-                //         'default' => 12,
-                //         'md' => 12,
-                //         'lg' => 12,
-                //     ]),
-
-                // TextInput::make('content_viewable_type')
-                //     ->rules(['max:255', 'string'])
-                //     ->placeholder('Content Viewable Type')
-                //     ->columnSpan([
-                //         'default' => 12,
-                //         'md' => 12,
-                //         'lg' => 12,
-                //     ]),
+                        ])
+                        ->required(),
+                    Forms\Components\Select::make('content_viewable_id')
+                        ->label('Liste des services')
+                        ->options(function (callable $get) {
+                            $type = $get('content_viewable_type');
+                            $typeid = $get('content_viewable_id');
+                            if ($type) {
+                                return app($type)::find($typeid)->pluck('title', 'id')->toArray(); // Adjust 'name' as per your model's display field
+                            }
+                            return Accueilserviceitem::all()->pluck('title', 'id')->toArray();
+                        })
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ])
+                        ->required(),
             ]),
         ]);
     }
@@ -80,12 +75,16 @@ class ContentViewsRelationManager extends RelationManager
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('title')
-                    ->label('Titre')
-                    ->toggleable()
+                Tables\Columns\TextColumn::make('content_view_id')
+                    ->label('Titre de contenu')
+                    ->getStateUsing(fn ($record) => ContentView::find($record->content_view_id)?->title)
                     ->sortable()
-                    ->searchable(true, null, true)
-                    ->limit(50),
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('content_viewable_id')
+                    ->label('Service')
+                    ->getStateUsing(fn ($record) => Accueilserviceitem::find($record->content_viewable_id)?->title)
+                    ->sortable()
+                    ->searchable(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
