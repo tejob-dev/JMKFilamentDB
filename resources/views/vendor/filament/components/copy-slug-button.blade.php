@@ -5,6 +5,9 @@
             if(preg_match("/service/i", $typel)){
                 $typel = "/services";
             }
+            if(preg_match("/projet/i", $typel)){
+                $typel = "/projets";
+            }
         @endphp
         <div class="flex items-center">
             @if($getRecord()->boutonlien)
