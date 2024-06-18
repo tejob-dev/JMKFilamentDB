@@ -268,6 +268,18 @@ $setting = App\Models\Setting::first();
                                     </ul>
                                     <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
                                 </li>
+                                <li class="">
+                                    <div class="">
+                                            <span class="newicon newicon-professions-and-jobs"></span>
+                                            <a href="/nos-projetsactivits.html">Nos Projets</a>
+                                    </div>
+                                    <!-- <ul>
+                                        <li><a href="jmk-consulting-caompany.html">JMK Consulting Caompany</a></li>
+                                        <li><a href="genie-bio.html">Génie Bio</a></li>
+                                        <li><a href="sicadevd.html">Sicadevd</a></li>
+                                    </ul> -->
+                                    <!-- <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div> -->
+                                </li>
                                 <!-- <li><a href="actualites.html">Actualités</a></li> -->
                             </ul>
                         </div>

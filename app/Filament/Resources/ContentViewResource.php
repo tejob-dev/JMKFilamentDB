@@ -218,6 +218,7 @@ class ContentViewResource extends Resource
     {
         return [
             ContentViewResource\RelationManagers\ServicesItemRelationManager::class,
+            ContentViewResource\RelationManagers\ProjetsItemRelationManager::class
         ];
     }
 

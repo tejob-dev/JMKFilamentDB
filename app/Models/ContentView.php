@@ -84,4 +84,12 @@ class ContentView extends Model
     {
         return $this->belongsTo(CompositeView::class);
     }
+
+    public function accueilprojetitems()
+    {
+        return $this->morphedByMany(
+            Accueilprojetitem::class,
+            'content_viewable'
+        );
+    }
 }

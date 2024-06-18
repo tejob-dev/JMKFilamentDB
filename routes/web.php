@@ -41,10 +41,13 @@ Route::get('/', function () {
     return view('welcome');
 });
         
-Route::get('/{slug}.html', [FrontendController::class, 'buttonpage']);
+// Route::get('/{slug}.html', [FrontendController::class, 'buttonpage']);
 
 Route::get('/nos-services.html', [FrontendController::class, 'services']);
 Route::get('/services/{slug}', [FrontendController::class, 'services']);
+
+Route::get('/nos-projetsactivits.html', [FrontendController::class, 'projets']);
+Route::get('/projets/{slug}', [FrontendController::class, 'projets']);
 
 //PREVIEW ALL PAGES
 Route::get('/make/preview/{cid}/{cname}', [FrontendController::class, 'makePreview']);
