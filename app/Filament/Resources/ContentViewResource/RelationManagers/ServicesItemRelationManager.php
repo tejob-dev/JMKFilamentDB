@@ -33,7 +33,7 @@ class ServicesItemRelationManager extends RelationManager
 
     protected static ?string $label = 'Lier un service et son contenu';
 
-    protected static ?string $title = 'Lier un ervice et son contenu';
+    protected static ?string $title = 'Lier un service et son contenu';
 
     protected static string $relationship = 'accueilserviceitems';
     

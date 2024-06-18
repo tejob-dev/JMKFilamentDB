@@ -51,7 +51,7 @@ class AccueilserviceitemResource extends Resource
 
                     Textarea::make('text')
                         ->label("Descriptions")
-                        ->rules(['max:255', 'string'])
+                        ->rules([ 'string'])
                         ->nullable()
                         ->placeholder('Text')
                         ->columnSpan([
