@@ -31,7 +31,9 @@ use Filament\Resources\RelationManagers\RelationManager;
 class ServicesItemRelationManager extends RelationManager
 {
 
-    protected static ?string $title = 'Services';
+    protected static ?string $label = 'Lier un service et son contenu';
+
+    protected static ?string $title = 'Lier un ervice et son contenu';
 
     protected static string $relationship = 'accueilserviceitems';
     
@@ -48,15 +50,22 @@ class ServicesItemRelationManager extends RelationManager
         return $form->schema([
             Grid::make(['default' => 0])->schema([
 
-                    Forms\Components\Select::make('content_view_id')
+                    Select::make('content_view_id')
                         ->label('Contenue de la page')
-                        ->options(ContentView::all()->pluck('title', 'id')->toArray())
+                        ->options(function (HasRelationshipTable $livewire, callable $get, callable $set) {
+                            $items = ContentView::all()->pluck('title', 'id');
+                            return $items->toArray();
+                        })
+                        ->default(function (HasRelationshipTable $livewire) {
+                            return $livewire?->ownerRecord?->id ?? null;
+                        })
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
                         ])
-                        ->required(),
+                        ->searchable()
+                        ->required(), // Enable search functionality if desired
                     Forms\Components\Select::make('content_viewable_id')
                         ->label('Liste des services')
                         ->options(function (callable $get) {

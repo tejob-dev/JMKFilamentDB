@@ -32,7 +32,7 @@ class ContentViewsRelationManager extends RelationManager
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
-                TextInput::make('title')
+                    TextInput::make('title')
                         ->rules(['max:255', 'string'])
                         ->required()
                         ->label('Titre')
@@ -44,12 +44,11 @@ class ContentViewsRelationManager extends RelationManager
                         ]),
 
                         
-                        Select::make('composite_view_id')
+                    Select::make('composite_view_id')
                         ->label("Vue composante")
                         // ->rules(['exists:accueilservices,id'])
                         ->nullable()
                         // ->relationship('accueilservice', 'title')
-
                         ->id('composite_view_id')
                         ->extraAttributes(['class' => 'composite_view_class'])
                         ->options(CompositeView::all()->pluck('title', 'id')->toArray())
@@ -110,25 +109,25 @@ class ContentViewsRelationManager extends RelationManager
                         ]),
 
                     MorphToSelect::make("content_viewable")
-                    ->label("Type de contenu")
-                    // ->extraAttributes(['class' => 'bg-gray-50'])
-                    ->columnSpan([
-                        'default' => 12,
-                        'md' => 9,
-                        'lg' => 9,
-                    ])
-                    ->types(
-                        [
-                            Type::make(Accueilserviceitem::class)
-                            ->label("Les services")
-                            ->titleColumnName("title"),
-                            Type::make(Accueilclientitem::class)
-                            ->label("Les clients")
-                            ->titleColumnName("title"),
-                        ]
-                    )
-                    ->searchable()
-                    ->preload(),
+                        ->label("Type de contenu")
+                        // ->extraAttributes(['class' => 'bg-gray-50'])
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 9,
+                            'lg' => 9,
+                        ])
+                        ->types(
+                            [
+                                Type::make(Accueilserviceitem::class)
+                                ->label("Les services")
+                                ->titleColumnName("title"),
+                                Type::make(Accueilclientitem::class)
+                                ->label("Les clients")
+                                ->titleColumnName("title"),
+                            ]
+                        )
+                        ->searchable()
+                        ->preload(),
             ]),
         ]);
     }
