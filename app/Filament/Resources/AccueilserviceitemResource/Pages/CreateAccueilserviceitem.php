@@ -12,7 +12,10 @@ class CreateAccueilserviceitem extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['boutonlien'] = Accueilserviceitem::formatBoutonLien($data['boutonlien'], $data['title']);
+        
+        if(preg_match("/\/projets\//i", $data['boutonlien']) == false){
+            $data['boutonlien'] = Accueilserviceitem::formatBoutonLien("/services/", $data['boutonlien'], $data['title']);
+        }
         return $data;
     }
 }
