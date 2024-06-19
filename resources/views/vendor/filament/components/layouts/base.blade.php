@@ -179,83 +179,75 @@
         @endif
 
         <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            Livewire.hook('message.processed', (message, component) => {
-                const modalElement = document.querySelector('[wire\\:id] .filament-modal'); // Adjust the selector based on your modal's class
-                if (modalElement && modalElement.style.display !== 'none') {
-                    executeOnModalOpen();
-                }
-            });
-        });
-
-        function executeOnModalOpen() {
-            // Your custom JavaScript code here
-            // var scriptTag = document.getElementById('my-component-view');
-            // if (scriptTag) {
-            //     // Get the content of the script tag
-            //     const scriptContent = scriptTag.textContent || scriptTag.innerText;
-            //     // Execute the script content
-            //     eval(scriptContent);
-            // } else {
-            //     console.log('Script tag with ID "my-component-view" not found.');
-            // }
-
-// Assuming you have a way to get the content for each CompositeView
-            function transformString(input) {
-                // Split the input string by commas
-                console.log(input);
-                if(typeof input !== 'undefined'){
-
-                    const elements = input.split(',');
-    
-                    // Transform each element into the desired format
-                    const transformedElements = elements.map(element => `   ${element}: ""`);
-    
-                    // Join the transformed elements with commas and add a trailing comma
-                    const result = "[\n {\n"+transformedElements.join(',\n') + ','+"\n},\n]";
-    
-                    return result;
-                }
-
-                return "Erreur survénue !"
-            }
-            
-            var compositeViewContents = {
-                @foreach(App\Models\CompositeView::all() as $compositeView)
-                    {{ $compositeView->id }}: @json([$compositeView->required, asset(\Storage::url($compositeView->image))]),
-                @endforeach
-            };
-            console.log(compositeViewContents);
-
-            const selectFields = document.querySelectorAll('.composite_view_class');
-            const textAreaFields = document.querySelectorAll('.content_class');
-            const dynamicImageElements = document.querySelectorAll('.dynamic_image_class');
-
-            if (selectFields.length > 0) {
-                selectFields.forEach((selectField, index) => {
-                    selectField.addEventListener('change', function (event) {
-                        console.log(textAreaFields, dynamicImageElements);
-                        const selectedId = event.target.value;
-                        const content = compositeViewContents[selectedId] || '';
-                        
-                        const textAreaField = textAreaFields[index];// selectField.closest('.item').querySelector('.content_class');
-                        const dynamicImageElement = dynamicImageElements[index];// selectField.closest('.item').querySelector('.dynamic_image_class');
-                        
-                        if (textAreaField) {
-                            textAreaField.value = transformString(content[0]);
-                        }
-                        if (dynamicImageElement) {
-                            dynamicImageElement.src = content[1];
-                        }
-                    });
+            document.addEventListener('DOMContentLoaded', function () {
+                Livewire.hook('message.processed', (message, component) => {
+                    const modalElement = document.querySelector('[wire\\:id] .filament-modal'); // Adjust the selector based on your modal's class
+                    if (modalElement && modalElement.style.display !== 'none') {
+                        executeOnModalOpen();
+                    }
                 });
-            } else {
-                // SCRIPT 1
-                console.log("Select non definit !");
+            });
+
+            function executeOnModalOpen() {
+
+                // Assuming you have a way to get the content for each CompositeView
+                function transformString(input) {
+                    // Split the input string by commas
+                    console.log(input);
+                    if(typeof input !== 'undefined'){
+
+                        const elements = input.split(',');
+        
+                        // Transform each element into the desired format
+                        const transformedElements = elements.map(element => `   ${element}: ""`);
+        
+                        // Join the transformed elements with commas and add a trailing comma
+                        const result = "[\n {\n"+transformedElements.join(',\n') + ','+"\n},\n]";
+        
+                        return result;
+                    }
+
+                    return "Erreur survénue !"
+                }
+                
+                var compositeViewContents = {
+                    @foreach(App\Models\CompositeView::all() as $compositeView)
+                        {{ $compositeView->id }}: @json([$compositeView->required, asset(\Storage::url($compositeView->image))]),
+                    @endforeach
+                };
+                console.log(compositeViewContents);
+
+                const selectFields = document.querySelectorAll('.composite_view_class');
+                const textAreaFields = document.querySelectorAll('.content_class');
+                const dynamicImageElements = document.querySelectorAll('.dynamic_image_class');
+
+                if (selectFields.length > 0) {
+                    selectFields.forEach((selectField, index) => {
+                        selectField.addEventListener('change', function (event) {
+                            console.log(textAreaFields, dynamicImageElements);
+                            const selectedId = event.target.value;
+                            const content = compositeViewContents[selectedId] || '';
+                            
+                            const textAreaField = textAreaFields[index];// selectField.closest('.item').querySelector('.content_class');
+                            const dynamicImageElement = dynamicImageElements[index];// selectField.closest('.item').querySelector('.dynamic_image_class');
+                            
+                            if (textAreaField) {
+                                textAreaField.value = transformString(content[0]);
+                            }
+                            if (dynamicImageElement) {
+                                dynamicImageElement.src = content[1];
+                            }
+                        });
+                    });
+                } else {
+                    // SCRIPT 1
+                    console.log("Select non definit !");
+                }
+
+                console.log('Modal is opened!');
             }
 
-            console.log('Modal is opened!');
-        }
+            executeOnModalOpen();
         </script>
 
         @foreach (\Filament\Facades\Filament::getScripts() as $name => $path)
