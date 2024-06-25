@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AccueilprojetitemResource\RelationManagers;
+namespace App\Filament\Resources\ProduitResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -9,7 +9,7 @@ use App\Models\CompositeView;
 use App\Models\ContentViewable;
 use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
-use App\Models\Accueilprojetitem;
+use App\Models\Produit;
 use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\View;
@@ -37,7 +37,7 @@ class ContentViewsRelationManager extends RelationManager
 
     protected static string $relationship = 'contentViews';
     
-    // protected static ?string $model = Accueilprojetitem::class;
+    // protected static ?string $model = Produit::class;
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -59,14 +59,14 @@ class ContentViewsRelationManager extends RelationManager
                         ->searchable()
                         ->required(),
                     Forms\Components\Select::make('content_viewable_id')
-                        ->label('Liste des projets')
+                        ->label('Liste des produits')
                         ->options(function (callable $get) {
                             $type = $get('content_viewable_type');
                             $typeid = $get('content_viewable_id');
                             if ($type) {
                                 return app($type)::find($typeid)->pluck('title', 'id')->toArray(); // Adjust 'name' as per your model's display field
                             }
-                            return Accueilprojetitem::all()->pluck('title', 'id')->toArray();
+                            return Produit::all()->pluck('title', 'id')->toArray();
                         })
                         ->default(function (HasRelationshipTable $livewire) {
                             return $livewire?->ownerRecord?->id ?? null;
@@ -91,8 +91,8 @@ class ContentViewsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('content_viewable_id')
-                    ->label('Projet')
-                    ->getStateUsing(fn ($record) => Accueilprojetitem::find($record->content_viewable_id)?->title)
+                    ->label('Produit')
+                    ->getStateUsing(fn ($record) => Produit::find($record->content_viewable_id)?->title)
                     ->sortable()
                     ->searchable(),
             ])
@@ -131,7 +131,7 @@ class ContentViewsRelationManager extends RelationManager
             ->headerActions([Tables\Actions\CreateAction::make()
             ->using(function (HasRelationshipTable $livewire, array $data): Model {
                 $dataf = $data;
-                $dataf["content_viewable_type"] = strval(Accueilprojetitem::class);
+                $dataf["content_viewable_type"] = strval(Produit::class);
                 // dd($dataf);
                 return ContentViewable::create($dataf); // $livewire->getRelationship()->create($data);
             })])
@@ -139,7 +139,7 @@ class ContentViewsRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                 ->using(function (HasRelationshipTable $livewire, array $data): ?bool {
                     $dataf = $data;
-                    $dataf["content_viewable_type"] = strval(Accueilprojetitem::class);
+                    $dataf["content_viewable_type"] = strval(Produit::class);
                     // dd($dataf);
                     $contable = ContentViewable::where([
                         ["content_view_id", "=", $livewire->mountedTableActionData["pivot_content_view_id"]],

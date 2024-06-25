@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\GallerieResource\RelationManagers;
+namespace App\Filament\Resources\FormationResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -9,7 +9,7 @@ use App\Models\CompositeView;
 use App\Models\ContentViewable;
 use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
-use App\Models\Gallerie;
+use App\Models\Formation;
 use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\View;
@@ -37,7 +37,7 @@ class ContentViewsRelationManager extends RelationManager
 
     protected static string $relationship = 'contentViews';
     
-    // protected static ?string $model = Gallerie::class;
+    // protected static ?string $model = Formation::class;
 
     protected static ?string $recordTitleAttribute = 'title';
 
@@ -59,14 +59,14 @@ class ContentViewsRelationManager extends RelationManager
                         ->searchable()
                         ->required(),
                     Forms\Components\Select::make('content_viewable_id')
-                        ->label('Liste des galleries')
+                        ->label('Liste des formations')
                         ->options(function (callable $get) {
                             $type = $get('content_viewable_type');
                             $typeid = $get('content_viewable_id');
                             if ($type) {
                                 return app($type)::find($typeid)->pluck('title', 'id')->toArray(); // Adjust 'name' as per your model's display field
                             }
-                            return Gallerie::all()->pluck('title', 'id')->toArray();
+                            return Formation::all()->pluck('title', 'id')->toArray();
                         })
                         ->default(function (HasRelationshipTable $livewire) {
                             return $livewire?->ownerRecord?->id ?? null;
@@ -91,8 +91,8 @@ class ContentViewsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('content_viewable_id')
-                    ->label('Gallerie')
-                    ->getStateUsing(fn ($record) => Gallerie::find($record->content_viewable_id)?->title)
+                    ->label('Formation')
+                    ->getStateUsing(fn ($record) => Formation::find($record->content_viewable_id)?->title)
                     ->sortable()
                     ->searchable(),
             ])
@@ -131,7 +131,7 @@ class ContentViewsRelationManager extends RelationManager
             ->headerActions([Tables\Actions\CreateAction::make()
             ->using(function (HasRelationshipTable $livewire, array $data): Model {
                 $dataf = $data;
-                $dataf["content_viewable_type"] = strval(Gallerie::class);
+                $dataf["content_viewable_type"] = strval(Formation::class);
                 // dd($dataf);
                 return ContentViewable::create($dataf); // $livewire->getRelationship()->create($data);
             })])
@@ -139,7 +139,7 @@ class ContentViewsRelationManager extends RelationManager
                 Tables\Actions\EditAction::make()
                 ->using(function (HasRelationshipTable $livewire, array $data): ?bool {
                     $dataf = $data;
-                    $dataf["content_viewable_type"] = strval(Gallerie::class);
+                    $dataf["content_viewable_type"] = strval(Formation::class);
                     // dd($dataf);
                     $contable = ContentViewable::where([
                         ["content_view_id", "=", $livewire->mountedTableActionData["pivot_content_view_id"]],
