@@ -37,10 +37,10 @@ class Accueilserviceitem extends Model
         // For example, you can prepend 'http://' if it's not present
         $slug = $boutonlien;
         if($boutonlien != null){
-            $slug = formatSlug($boutonlien, "services/", ".html");
+            $slug = formatSlug($boutonlien, "missions/", ".html");
 
         }else{
-            $slug = formatSlug($title, "services/", ".html");
+            $slug = formatSlug($title, "missions/", ".html");
         }
 
         // Other formatting logic can be added here

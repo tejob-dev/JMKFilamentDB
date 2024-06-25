@@ -92,4 +92,54 @@ class ContentView extends Model
             'content_viewable'
         );
     }
+
+    public function publications()
+    {
+        return $this->morphedByMany(Publication::class, 'content_viewable');
+    }
+
+    public function galleries()
+    {
+        return $this->morphedByMany(Gallerie::class, 'content_viewable');
+    }
+
+    public function opportunites()
+    {
+        return $this->morphedByMany(Opportunite::class, 'content_viewable');
+    }
+
+    public function cultures()
+    {
+        return $this->morphedByMany(Culture::class, 'content_viewable');
+    }
+
+    public function impacts()
+    {
+        return $this->morphedByMany(Impact::class, 'content_viewable');
+    }
+
+    public function produits()
+    {
+        return $this->morphedByMany(Produit::class, 'content_viewable');
+    }
+
+    public function valeurs()
+    {
+        return $this->morphedByMany(Valeur::class, 'content_viewable');
+    }
+
+    public function visions()
+    {
+        return $this->morphedByMany(Vision::class, 'content_viewable');
+    }
+
+    public function missions()
+    {
+        return $this->morphedByMany(Mission::class, 'content_viewable');
+    }
+
+    public function videos()
+    {
+        return $this->morphedByMany(Video::class, 'content_viewable');
+    }
 }

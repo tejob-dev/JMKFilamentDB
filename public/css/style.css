@@ -296,7 +296,7 @@ h1,h2,h3,h4,h5,h6{
   border-top-color: rgba(255, 255, 255, 0.5); 
 }
 
-/* AnimaciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n del preloader */
+/* AnimaciÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã‚Â ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬ÃƒÂ¢Ã¢â‚¬Å¾Ã‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€šÃ‚Â ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¾Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Â ÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡Ãƒâ€šÃ‚Â¬ÃƒÆ’Ã¢â‚¬Â¦Ãƒâ€šÃ‚Â¡ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¢ÃƒÂ¢Ã¢â‚¬Å¡Ã‚Â¬Ãƒâ€¦Ã‚Â¡ÃƒÆ’Ã†â€™ÃƒÂ¢Ã¢â€šÂ¬Ã…Â¡ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â³n del preloader */
 @keyframes spinner {
   to {
     transform: rotateZ(360deg);
@@ -859,8 +859,9 @@ img {
   display: block;
   font-size: 15px;
   line-height: 28px;
+  font-family: 'Ubuntu', sans-serif;
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 /** header-upper **/
@@ -1521,7 +1522,7 @@ img {
   color:#75727b;
   text-align: left;
   padding: 14px 0px;
-  text-transform: capitalize;
+  text-transform: uppercase;
   transition:all 500ms ease;
   border-bottom: 1px solid #e7e3ee;
   -moz-transition:all 500ms ease;
@@ -2619,7 +2620,7 @@ div#mCSB_1_container{
   font-family: 'Urbanist', sans-serif;
   font-weight: 500;
   color: #272e39;
-  padding-left: 0px;
+  padding-left: 50px;
   margin-bottom: 6px;
 }
 
@@ -2629,11 +2630,11 @@ div#mCSB_1_container{
 
 .about-section .content-box .list-item li:before{
   position: absolute;
-  /* content: "\f104"; */
+  content: "\f104";
   font-family: 'flaticon';
   font-size: 26px;
-  color: #272e39;
-  left: 13px;
+  color: #ffffff;
+  left: 3px;
   top: 1px;
   font-weight: 400;
   z-index: 1;
@@ -2641,11 +2642,11 @@ div#mCSB_1_container{
 
 .about-section .content-box .list-item li:after{
   position: absolute;
-  /* content: ''; */
+  content: '';
   left: 0px;
-  top: 3px;
-  width: 24px;
-  height: 24px;
+  top: 0px;
+  width: 30px;
+  height: 30px;
   border-radius: 50% 50% 0px 50%;
 }
 
@@ -3907,7 +3908,7 @@ div#mCSB_1_container{
 }
 
 .working-block-one .inner-box .image-box .image img{
-  width: 70%;
+  width: 64%;
   border-radius: 30px 30px 0px 30px;
 }
 
@@ -16183,4 +16184,8 @@ body > div > section.banner-section > div > div.owl-stage-outer > div > div.owl-
   background-color: rgb(0 0 0 / 35%); /* Adjust the opacity as needed */
   z-index: 1; /* Ensure the overlay appears above the image */
   pointer-events: none; /* Ensure the overlay doesn't interfere with interactions */
+}
+
+body > div > header > div.header-top > div > ul.info-list.clearfix > li > span {
+    font-family: 'Ubuntu', sans-serif;
 }

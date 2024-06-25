@@ -218,7 +218,22 @@ class ContentViewResource extends Resource
     {
         return [
             ContentViewResource\RelationManagers\ServicesItemRelationManager::class,
-            ContentViewResource\RelationManagers\ProjetsItemRelationManager::class
+            ContentViewResource\RelationManagers\ProjetsItemRelationManager::class,
+            ContentViewResource\RelationManagers\MissionsItemRelationManager::class,
+            ContentViewResource\RelationManagers\VisionsItemRelationManager::class,
+            ContentViewResource\RelationManagers\ValeursItemRelationManager::class,
+            ContentViewResource\RelationManagers\EquipesItemRelationManager::class,
+            ContentViewResource\RelationManagers\ProduitsItemRelationManager::class,
+            ContentViewResource\RelationManagers\ImpactsItemRelationManager::class,
+            ContentViewResource\RelationManagers\CulturesItemRelationManager::class,
+            ContentViewResource\RelationManagers\OpportunitesItemRelationManager::class,
+            ContentViewResource\RelationManagers\ClientsItemRelationManager::class,
+            ContentViewResource\RelationManagers\ManagersItemRelationManager::class,
+            ContentViewResource\RelationManagers\FormationsItemRelationManager::class,
+            ContentViewResource\RelationManagers\ActualitesItemRelationManager::class,
+            ContentViewResource\RelationManagers\PublicationsItemRelationManager::class,
+            ContentViewResource\RelationManagers\GalleriesItemRelationManager::class,
+            ContentViewResource\RelationManagers\VideosItemRelationManager::class,
         ];
     }
 

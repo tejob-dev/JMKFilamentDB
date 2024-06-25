@@ -209,7 +209,7 @@ $lienfooters = App\Models\Lienfooter::get();
                     <ul class="five-item-carousel owl-carousel owl-theme owl-nav-none owl-dots-none">
                         @foreach($partners as $partner)
                         <li>
-                            <figure class="clients-logo"><a href="#"><img src="{{ Storage::url($partner?->image) }}" style="height: 100px;" alt="{{ ($partner?->imagetile) }}"></a></figure>
+                            <figure class="clients-logo"><a href="#"><img src="{{ Storage::url($partner?->image) }}" style="height: 76px;" alt="{{ ($partner?->imagetile) }}"></a></figure>
                         </li>
                         @endforeach
                     </ul>
@@ -338,7 +338,7 @@ $lienfooters = App\Models\Lienfooter::get();
                             <div class="working-block-one">
                                 <div class="inner-box">
                                     <div class="image-box">
-                                        <figure class="image"><img src="{{ Storage::url($accueilclientitem?->image) }}" alt="{{ $accueilclientitem?->title }}" style="max-height: 162px;"></figure>
+                                        <figure class="image"><img src="{{ Storage::url($accueilclientitem?->image) }}" alt="{{ $accueilclientitem?->title }}" style="max-height: 115px;"></figure>
                                         <div class="icon-box"><i class="{{ ($accueilclientitem?->icone) }}"></i></div>
                                     </div>
                                     <div class="lower-content">

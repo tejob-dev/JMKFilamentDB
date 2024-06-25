@@ -83,7 +83,7 @@ class ProjetsItemRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('content_viewable_id')
-                    ->label('Service')
+                    ->label('Projet')
                     ->getStateUsing(fn ($record) => Accueilprojetitem::find($record->content_viewable_id)?->title)
                     ->sortable()
                     ->searchable(),

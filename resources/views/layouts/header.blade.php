@@ -310,7 +310,13 @@ $setting = App\Models\Setting::first();
     <div class="sticky-header">
         <div class="outer-container">
             <div class="outer-box">
-                <div class="menu-area clearfix">
+                <div class="menu-area clearfix" style="display: flex;">
+                    <figure class="logo-box" style="
+                                width: fit-content;
+                                display: inline-block;
+                            "><a href="/">
+                                <img src="{{Storage::url($setting->logo_site)}}" alt=""></a>
+                        </figure><!--Mobile Navigation Toggler-->
                     <nav class="main-menu clearfix">
                         <!--Keep This Empty / Menu will come through Javascript-->
                     </nav>

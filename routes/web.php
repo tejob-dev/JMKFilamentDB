@@ -49,6 +49,54 @@ Route::get('/services/{slug}', [FrontendController::class, 'services']);
 Route::get('/nos-projetsactivits.html', [FrontendController::class, 'projets']);
 Route::get('/projets/{slug}', [FrontendController::class, 'projets']);
 
+Route::get('/notre-mission.html', [FrontendController::class, 'missions']);
+Route::get('/missions/{slug}', [FrontendController::class, 'missions']);
+
+Route::get('/notre-vision.html', [FrontendController::class, 'visions']);
+Route::get('/visions/{slug}', [FrontendController::class, 'visions']);
+
+Route::get('/nos-valeurs.html', [FrontendController::class, 'valeurs']);
+Route::get('/valeurs/{slug}', [FrontendController::class, 'valeurs']);
+
+Route::get('/notre-equipe.html', [FrontendController::class, 'equipes']);
+Route::get('/equipes/{slug}', [FrontendController::class, 'equipes']);
+
+Route::get('/nos-produits.html', [FrontendController::class, 'produits']);
+Route::get('/produits/{slug}', [FrontendController::class, 'produits']);
+
+Route::get('/notre-impact.html', [FrontendController::class, 'impacts']);
+Route::get('/impacts/{slug}', [FrontendController::class, 'impacts']);
+
+Route::get('/notre-culture.html', [FrontendController::class, 'cultures']);
+Route::get('/cultures/{slug}', [FrontendController::class, 'cultures']);
+
+Route::get('/nos-opportunits.html', [FrontendController::class, 'opportunits']);
+Route::get('/opportunites/{slug}', [FrontendController::class, 'opportunits']);
+
+Route::get('/nos-clients.html', [FrontendController::class, 'clients']);
+Route::get('/clients/{slug}', [FrontendController::class, 'clients']);
+
+Route::get('/notre-managers.html', [FrontendController::class, 'managers']);
+Route::get('/managers/{slug}', [FrontendController::class, 'managers']);
+
+Route::get('/nos-formations.html', [FrontendController::class, 'formations']);
+Route::get('/formations/{slug}', [FrontendController::class, 'formations']);
+
+// Route::get('/nous-rejoindre.html', [FrontendController::class, 'rejoindres']);
+// Route::get('/rejoindres/{slug}', [FrontendController::class, 'rejoindres']);
+
+Route::get('/actualites.html', [FrontendController::class, 'actualites']);
+Route::get('/actualites/{slug}', [FrontendController::class, 'actualites']);
+
+Route::get('/publications.html', [FrontendController::class, 'publications']);
+Route::get('/publications/{slug}', [FrontendController::class, 'publications']);
+
+Route::get('/photos.html', [FrontendController::class, 'photos']);
+Route::get('/galleries/{slug}', [FrontendController::class, 'photos']);
+
+Route::get('/videos.html', [FrontendController::class, 'videos']);
+Route::get('/videos/{slug}', [FrontendController::class, 'videos']);
+
 //PREVIEW ALL PAGES
 Route::get('/make/preview/{cid}/{cname}', [FrontendController::class, 'makePreview']);
 
