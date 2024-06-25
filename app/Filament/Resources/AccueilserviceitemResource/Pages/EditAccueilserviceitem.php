@@ -12,10 +12,6 @@ class EditAccueilserviceitem extends EditRecord
 
     protected function mutateFormDataBeforeSave(array $data): array
     {
-        // dd($data);
-        if(preg_match("/\/projets\//i", $data['boutonlien']) == false){
-            $data['boutonlien'] = Accueilserviceitem::formatBoutonLien("/services/", $data['boutonlien'], $data['title']);
-        }
-        return $data;
+        return serializeButtonurlFunc($data, "/services/");
     }
 }

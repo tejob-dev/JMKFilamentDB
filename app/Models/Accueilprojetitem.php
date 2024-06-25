@@ -27,21 +27,4 @@ class Accueilprojetitem extends Model
         return $this->morphToMany(ContentView::class, 'content_viewable', 'content_viewables', 'content_viewable_id', 'content_view_id');
         // return $this->morphedByMany(Accueilserviceitem::class, 'content_viewables');
     }
-
-    public static function formatBoutonLien($typel, $boutonlien, $title)
-    {
-        // Add your formatting logic here
-        // For example, you can prepend 'http://' if it's not present
-        $slug = $boutonlien;
-        if($boutonlien != null){
-            $slug = formatSlug($boutonlien, "$typel", ".html");
-
-        }else{
-            $slug = formatSlug($title, "$typel", ".html");
-        }
-
-        // Other formatting logic can be added here
-
-        return $slug;
-    }
 }

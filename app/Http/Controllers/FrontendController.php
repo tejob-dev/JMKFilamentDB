@@ -32,7 +32,7 @@ class FrontendController extends Controller
 
             $allservices = Accueilserviceitem::get();
             $itemfit = $allservices->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "services/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "services/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -64,7 +64,7 @@ class FrontendController extends Controller
 
             $allitems = Accueilprojetitem::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "projets/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "projets/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -96,7 +96,7 @@ class FrontendController extends Controller
 
             $allitems = Mission::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "missions/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "missions/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -128,7 +128,7 @@ class FrontendController extends Controller
 
             $allitems = Vision::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "missions/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "missions/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -160,7 +160,7 @@ class FrontendController extends Controller
 
             $allitems = Valeur::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "valeurs/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "valeurs/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -192,7 +192,7 @@ class FrontendController extends Controller
 
             $allitems = Equipe::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "equipes/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "equipes/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -224,7 +224,7 @@ class FrontendController extends Controller
 
             $allitems = Produit::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "produits/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "produits/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -256,7 +256,7 @@ class FrontendController extends Controller
 
             $allitems = Impact::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "impacts/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "impacts/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -288,7 +288,7 @@ class FrontendController extends Controller
 
             $allitems = Culture::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "cultures/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "cultures/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -320,7 +320,7 @@ class FrontendController extends Controller
 
             $allitems = Opportunite::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "opportunites/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "opportunites/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -352,7 +352,7 @@ class FrontendController extends Controller
 
             $allitems = Actualite::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "actualites/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "actualites/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -384,7 +384,7 @@ class FrontendController extends Controller
 
             $allitems = Publication::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "publications/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "publications/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -416,7 +416,7 @@ class FrontendController extends Controller
 
             $allitems = Gallerie::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "photos/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "photos/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -448,7 +448,7 @@ class FrontendController extends Controller
 
             $allitems = Video::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "videos/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "videos/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -480,7 +480,8 @@ class FrontendController extends Controller
 
             $allitems = Formation::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "formations/", ".html")) == true ;
+                // dd($slug, formatSlug($item->title, "/formations/", ".html"));
+                return preg_match("/$slug/i",formatSlug($item->title, "formations/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -512,7 +513,7 @@ class FrontendController extends Controller
 
             $allitems = Accueilmanageritem::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "managers/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "managers/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);
@@ -544,7 +545,7 @@ class FrontendController extends Controller
 
             $allitems = Accueilclientitem::get();
             $itemfit = $allitems->filter(function ($item) use($slug) {
-                return preg_match("/$slug/i",formatSlug($item->title, "clients/", ".html")) == true ;
+                return preg_match("/$slug/i",formatSlug($item->title, "clients/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
             });
             $slugid = $itemfit?->first()->id??null;
             // dd($slug, $itemfit);

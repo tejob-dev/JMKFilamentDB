@@ -11,7 +11,7 @@
         @endphp
         <div class="flex items-center">
             @if($getRecord()->boutonlien)
-                <a class="flex" href="#" onclick="copyUrlToClipboard('{{ asset($typel.$getRecord()->boutonlien) }}'); event.preventDefault();" class="text-indigo-600 hover:text-indigo-900">
+                <a class="flex" href="#" onclick="copyUrlToClipboard('{{ asset($getRecord()->boutonlien) }}'); event.preventDefault();" class="text-indigo-600 hover:text-indigo-900">
                 <svg fill="#000000" height="20px" width="20px" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 362 362" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 362 362">
                     <g>
                         <path d="m214,266h-204c-5.523,0-10,4.477-10,10v64c0,5.523 4.477,10 10,10h204c5.522,0 10-4.477 10-10v-64c0-5.523-4.478-10-10-10zm-10,64h-184v-44h184v44z"/>
@@ -32,7 +32,7 @@
 </div>
 <script>
     function copyUrlToClipboard(url) {
-        var furl = url.replaceAll("{{$typel.''.$typel}}", "{{$typel}}");
+        var furl = url//.replaceAll("{{$typel.''.$typel}}", "{{$typel}}");
         // Create a temporary input element
         var tempInput = document.createElement("input");
         // Append it to the body
@@ -49,6 +49,6 @@
         if(furl.includes(".html"))
             alert("Lien copié avec succès !");
         else
-            alert("Lien est invalide, définissez le lien de la page ! ex:");
+            alert("Lien est invalide, définissez le lien de la page !");
     }
 </script>

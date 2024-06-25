@@ -20,6 +20,10 @@ class ImpactResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'title';
 
+    // protected static ?string $label = 'Services';
+
+    protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -104,6 +108,9 @@ class ImpactResource extends Resource
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
+                Tables\Columns\ViewColumn::make('open_url')
+                    ->label('')
+                    ->view('vendor.filament.components.copy-slug-button'),
             ])
             ->filters([DateRangeFilter::make('created_at')]);
     }

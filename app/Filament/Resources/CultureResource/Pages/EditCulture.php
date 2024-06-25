@@ -8,4 +8,9 @@ use App\Filament\Resources\CultureResource;
 class EditCulture extends EditRecord
 {
     protected static string $resource = CultureResource::class;
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        return serializeButtonurlFunc($data, "/cultures/");
+    }
 }

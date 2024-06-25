@@ -8,4 +8,9 @@ use App\Filament\Resources\ProduitResource;
 class CreateProduit extends CreateRecord
 {
     protected static string $resource = ProduitResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        return serializeButtonurlFunc($data, "/produits/");
+    }
 }

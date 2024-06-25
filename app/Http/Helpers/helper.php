@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Accueilclientitem;
+
 function renderHtml($content){
     //$setting->list_social
     // $content = str_replace('<strong>', '', str_replace('</strong>', '', $content));
@@ -48,6 +50,7 @@ function formatSlug($str, $prefix = null, $suffix = null) {
     $str = strtr($str, $accented_chars);
 
     // Replace spaces and other special characters with hyphens
+    $str = str_replace('.html', '', $str);
     $str = preg_replace('/[^a-z0-9]+/', '-', $str);
     $str = trim($str, '-'); // Remove any leading or trailing hyphens
     
@@ -120,3 +123,28 @@ function removeSpacesFromArray(&$array) {
         }
     }
 }
+
+// Method to format the 'boutonlien' attribute
+function formatBoutonLien($replacer, $boutonlien, $title)
+{
+    // Add your formatting logic here
+    // For example, you can prepend 'http://' if it's not present
+    $slug = $boutonlien;
+    if($boutonlien != null){
+        $slug = formatSlug($boutonlien, "$replacer", ".html");
+    }else{
+        $slug = formatSlug($title, "$replacer", ".html");
+    }
+    // Other formatting logic can be added here
+    return $slug;
+}
+
+function serializeButtonurlFunc($data, $type){
+    $type = str_replace("/", "", $type);
+    // dd($type, $data);
+    if(preg_match("/\/$type\//i", $data['boutonlien']) == false){
+        $data['boutonlien'] = formatBoutonLien("/$type/", $data['boutonlien'], $data['title']);
+    }
+    return $data;
+}
+

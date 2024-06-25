@@ -8,4 +8,9 @@ use App\Filament\Resources\GallerieResource;
 class CreateGallerie extends CreateRecord
 {
     protected static string $resource = GallerieResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        return serializeButtonurlFunc($data, "/galleries/");
+    }
 }

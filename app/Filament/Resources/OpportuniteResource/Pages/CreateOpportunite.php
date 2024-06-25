@@ -8,4 +8,9 @@ use App\Filament\Resources\OpportuniteResource;
 class CreateOpportunite extends CreateRecord
 {
     protected static string $resource = OpportuniteResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        return serializeButtonurlFunc($data, "/opportunites/");
+    }
 }

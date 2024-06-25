@@ -8,4 +8,9 @@ use App\Filament\Resources\ImpactResource;
 class CreateImpact extends CreateRecord
 {
     protected static string $resource = ImpactResource::class;
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        return serializeButtonurlFunc($data, "/impacts/");
+    }
 }

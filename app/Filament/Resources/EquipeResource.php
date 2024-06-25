@@ -182,6 +182,9 @@ class EquipeResource extends Resource
                 Tables\Columns\TextColumn::make('accueiltemoin.title')
                     ->toggleable()
                     ->limit(50),
+                Tables\Columns\ViewColumn::make('open_url')
+                    ->label('')
+                    ->view('vendor.filament.components.copy-slug-button'),
             ])
             ->filters([
                 DateRangeFilter::make('created_at'),

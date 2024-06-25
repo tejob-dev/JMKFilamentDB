@@ -12,9 +12,6 @@ class CreateAccueilprojetitem extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        if(preg_match("/\/projets\//i", $data['boutonlien']) == false){
-            $data['boutonlien'] = Accueilprojetitem::formatBoutonLien("/projets/", $data['boutonlien'], $data['title']);
-        }
-        return $data;
+        return serializeButtonurlFunc($data, "/projets/");
     }
 }
