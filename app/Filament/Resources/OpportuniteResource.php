@@ -117,7 +117,9 @@ class OpportuniteResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            OpportuniteResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

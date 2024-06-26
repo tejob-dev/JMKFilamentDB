@@ -187,3 +187,12 @@ function removeKeysRecursivelyRm($array, $keysToRemove) {
     }
     return $newArray;
 }
+
+function limitText($text, $limit) {
+    // Check if the text length exceeds the limit
+    if (strlen($text) > $limit) {
+        // Trim the text to the limit and add ellipsis
+        $text = substr($text, 0, $limit) . '...';
+    }
+    return $text;
+}

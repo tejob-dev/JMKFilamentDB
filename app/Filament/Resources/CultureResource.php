@@ -117,7 +117,9 @@ class CultureResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            CultureResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

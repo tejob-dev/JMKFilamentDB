@@ -37,4 +37,5 @@
     truncateText('body > div > section.about-section.sec-pad > div > div > div.col-lg-6.col-md-12.col-sm-12.content-column > div > div.text-box > p', 390); // Limit to 50 characters
     truncateText('.growth-block-one .inner-box p', 80); // Limit to 50 characters
     truncateText('.growth-section .growth-inner .content-box .text-box p', 94); // Limit to 50 characters
+    // truncateText('[class="limittext*"]', 94); // Limit to 50 characters
   </script>

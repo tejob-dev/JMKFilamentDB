@@ -117,7 +117,9 @@ class MissionResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            MissionResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

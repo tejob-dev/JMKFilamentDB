@@ -181,7 +181,9 @@ class FormationResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            FormationResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

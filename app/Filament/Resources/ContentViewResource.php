@@ -234,6 +234,7 @@ class ContentViewResource extends Resource
             ContentViewResource\RelationManagers\PublicationsItemRelationManager::class,
             ContentViewResource\RelationManagers\GalleriesItemRelationManager::class,
             ContentViewResource\RelationManagers\VideosItemRelationManager::class,
+            ContentViewResource\RelationManagers\ContactsItemRelationManager::class,
         ];
     }
 

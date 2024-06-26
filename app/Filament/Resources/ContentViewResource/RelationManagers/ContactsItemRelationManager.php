@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\AccueilclientResource\RelationManagers;
+namespace App\Filament\Resources\ContentViewResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Tables;
@@ -9,6 +9,7 @@ use App\Models\CompositeView;
 use App\Models\ContentViewable;
 use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
+use App\Models\Contact;
 use Illuminate\Support\Facades\DB;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\View;
@@ -27,48 +28,53 @@ use Filament\Forms\Components\MorphToSelect\Type;
 use Filament\Tables\Contracts\HasRelationshipTable;
 use Filament\Resources\RelationManagers\RelationManager;
 
-class ContentViewsRelationManager extends RelationManager
+class ContactsItemRelationManager extends RelationManager
 {
 
-    protected static ?string $title = 'Contenus de pages';
+    protected static ?string $label = 'Lier un contact et son contenu';
 
-    protected static ?string $label = 'Contenus de pages';
+    protected static ?string $title = 'Lier un contact et son contenu';
 
-    protected static string $relationship = 'contentViews';
+    protected static string $relationship = 'contacts';
     
-    // protected static ?string $model = Accueilclientitem::class;
+    // protected static ?string $model = Contact::class;
 
     protected static ?string $recordTitleAttribute = 'title';
 
     protected static bool $shouldRegisterNavigation = false;
+
+    protected static ?string $inverseRelationship = 'content_viewables';
 
     public static function form(Form $form): Form
     {
         return $form->schema([
             Grid::make(['default' => 0])->schema([
 
-                    Forms\Components\Select::make('content_view_id')
+                    Select::make('content_view_id')
                         ->label('Contenue de la page')
-                        ->options(ContentView::all()->pluck('title', 'id')->toArray())
+                        ->options(function (HasRelationshipTable $livewire, callable $get, callable $set) {
+                            $items = ContentView::all()->pluck('title', 'id');
+                            return $items->toArray();
+                        })
+                        ->default(function (HasRelationshipTable $livewire) {
+                            return $livewire?->ownerRecord?->id ?? null;
+                        })
                         ->columnSpan([
                             'default' => 12,
                             'md' => 12,
                             'lg' => 12,
                         ])
                         ->searchable()
-                        ->required(),
+                        ->required(), // Enable search functionality if desired
                     Forms\Components\Select::make('content_viewable_id')
-                        ->label('Liste des clients')
+                        ->label('Liste des contacts')
                         ->options(function (callable $get) {
                             $type = $get('content_viewable_type');
                             $typeid = $get('content_viewable_id');
                             if ($type) {
                                 return app($type)::find($typeid)->pluck('title', 'id')->toArray(); // Adjust 'name' as per your model's display field
                             }
-                            return Accueilclientitem::all()->pluck('title', 'id')->toArray();
-                        })
-                        ->default(function (HasRelationshipTable $livewire) {
-                            return $livewire?->ownerRecord?->id ?? null;
+                            return Contact::all()->pluck('title', 'id')->toArray();
                         })
                         ->columnSpan([
                             'default' => 12,
@@ -90,8 +96,8 @@ class ContentViewsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('content_viewable_id')
-                    ->label('Client')
-                    ->getStateUsing(fn ($record) => Accueilclientitem::find($record->content_viewable_id)?->title)
+                    ->label('Contact')
+                    ->getStateUsing(fn ($record) => Contact::find($record->content_viewable_id)?->title)
                     ->sortable()
                     ->searchable(),
             ])
@@ -127,18 +133,19 @@ class ContentViewsRelationManager extends RelationManager
                             );
                     }),
             ])
-            ->headerActions([Tables\Actions\CreateAction::make()
-            ->using(function (HasRelationshipTable $livewire, array $data): Model {
-                $dataf = $data;
-                $dataf["content_viewable_type"] = strval(Accueilclientitem::class);
-                // dd($dataf);
-                return ContentViewable::create($dataf); // $livewire->getRelationship()->create($data);
-            })])
-            ->actions([
-                Tables\Actions\EditAction::make()
-                ->using(function (HasRelationshipTable $livewire, array $data): ?bool {
+            ->headerActions([
+                Tables\Actions\CreateAction::make()
+                ->using(function (HasRelationshipTable $livewire, array $data): Model {
                     $dataf = $data;
-                    $dataf["content_viewable_type"] = strval(Accueilclientitem::class);
+                    $dataf["content_viewable_type"] = strval(Contact::class);
+                    // dd($dataf);
+                    return ContentViewable::create($dataf); // $livewire->getRelationship()->create($data);
+                })
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make()->using(function (HasRelationshipTable $livewire, array $data): ?bool {
+                    $dataf = $data;
+                    $dataf["content_viewable_type"] = strval(Contact::class);
                     // dd($dataf);
                     $contable = ContentViewable::where([
                         ["content_view_id", "=", $livewire->mountedTableActionData["pivot_content_view_id"]],
@@ -147,8 +154,7 @@ class ContentViewsRelationManager extends RelationManager
                     // dd($livewire->mountedTableActionData);
                     return $contable?->update($dataf);
                 }),
-                Tables\Actions\DeleteAction::make()
-                ->before(function (Tables\Actions\DeleteAction $action, RelationManager $livewire) {
+                Tables\Actions\DeleteAction::make()->before(function (Tables\Actions\DeleteAction $action, RelationManager $livewire) {
                     // dd($action, $livewire->mounted:TableActionData);
                     $contable = ContentViewable::where([
                         ["content_view_id", "=", $livewire->mountedTableActionData["content_view_id"]],

@@ -117,7 +117,9 @@ class GallerieResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            GallerieResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

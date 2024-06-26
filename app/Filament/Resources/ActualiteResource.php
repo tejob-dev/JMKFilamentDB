@@ -225,7 +225,9 @@ class ActualiteResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            ActualiteResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

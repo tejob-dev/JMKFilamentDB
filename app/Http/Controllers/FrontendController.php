@@ -7,6 +7,7 @@ use App\Models\Equipe;
 use App\Models\Impact;
 use App\Models\Valeur;
 use App\Models\Vision;
+use App\Models\Contact;
 use App\Models\Culture;
 use App\Models\Mission;
 use App\Models\Produit;
@@ -25,6 +26,38 @@ use Illuminate\Support\Facades\View;
 class FrontendController extends Controller
 {
     //
+    public function contacts($slug = null){
+
+
+        if($slug){
+
+            $allservices = Contact::get();
+            $itemfit = $allservices->filter(function ($item) use($slug) {
+                return preg_match("/$slug/i",formatSlug($item->title, "contacts/", ".html")) == true || preg_match("/$slug/i", $item->boutonlien) == true ;
+            });
+            $slugid = $itemfit?->first()->id??null;
+            // dd($slug, $itemfit);
+            if(!$slugid) return redirect('/');
+
+            $view  = View::make('frontend.contacts.index', ['slug' => $slugid]);
+    
+            return $view;
+        }else{
+
+            $firstservice = Contact::first();
+
+            if($firstservice){
+                $view  = View::make('frontend.contacts.index', ['slug' => $firstservice->id]);
+    
+                return $view;
+            }
+
+        }
+
+        return redirect('/');
+
+    }
+
     public function services($slug = null){
 
 

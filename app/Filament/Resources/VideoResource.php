@@ -147,7 +147,9 @@ class VideoResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            VideoResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

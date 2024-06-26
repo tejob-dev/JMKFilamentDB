@@ -117,7 +117,9 @@ class ValeurResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            ValeurResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

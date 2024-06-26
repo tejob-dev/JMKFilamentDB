@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Vision;
+use App\Models\Contact;
 use Filament\{Tables, Forms};
 use Filament\Resources\{Form, Table, Resource};
 use Filament\Forms\Components\Grid;
@@ -10,18 +10,15 @@ use Filament\Forms\Components\Card;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\RichEditor;
 use App\Filament\Filters\DateRangeFilter;
-use App\Filament\Resources\ContentViewResource\RelationManagers\VisionsItemRelationManager;
-use App\Filament\Resources\VisionResource\Pages;
+use App\Filament\Resources\ContactResource\Pages;
 
-class VisionResource extends Resource
+class ContactResource extends Resource
 {
-    protected static ?string $model = Vision::class;
+    protected static ?string $model = Contact::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     protected static ?string $recordTitleAttribute = 'title';
-
-    // protected static ?string $label = 'Services';
 
     protected static ?string $navigationGroup = 'CONTENUS DES PAGES';
 
@@ -109,9 +106,6 @@ class VisionResource extends Resource
                     ->toggleable()
                     ->searchable(true, null, true)
                     ->limit(50),
-                Tables\Columns\ViewColumn::make('open_url')
-                    ->label('')
-                    ->view('vendor.filament.components.copy-slug-button'),
             ])
             ->filters([DateRangeFilter::make('created_at')]);
     }
@@ -119,17 +113,17 @@ class VisionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            VisionResource\RelationManagers\ContentViewsRelationManager::class,
+            ContactResource\RelationManagers\ContentViewsRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListVisions::route('/'),
-            'create' => Pages\CreateVision::route('/create'),
-            'view' => Pages\ViewVision::route('/{record}'),
-            'edit' => Pages\EditVision::route('/{record}/edit'),
+            'index' => Pages\ListContacts::route('/'),
+            'create' => Pages\CreateContact::route('/create'),
+            'view' => Pages\ViewContact::route('/{record}'),
+            'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
 }

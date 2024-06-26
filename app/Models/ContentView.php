@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Contact;
 use App\Models\Scopes\Searchable;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Database\Eloquent\Model;
@@ -141,5 +142,10 @@ class ContentView extends Model
     public function videos()
     {
         return $this->morphedByMany(Video::class, 'content_viewable');
+    }
+
+    public function contacts()
+    {
+        return $this->morphedByMany(Contact::class, 'content_viewable');
     }
 }

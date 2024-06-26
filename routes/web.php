@@ -2,17 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SlideController;
 use App\Http\Controllers\EquipeController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ActualiteController;
 use App\Http\Controllers\FormationController;
 use App\Http\Controllers\LienfooterController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\AccueilactuController;
+use App\Http\Controllers\ContactDataController;
 use App\Http\Controllers\AccueilaboutController;
 use App\Http\Controllers\AccueilvideoController;
 use App\Http\Controllers\AccueilclientController;
@@ -24,7 +26,6 @@ use App\Http\Controllers\AccueilformationController;
 use App\Http\Controllers\AccueilclientitemController;
 use App\Http\Controllers\AccueilmanageritemController;
 use App\Http\Controllers\AccueilserviceitemController;
-use App\Http\Controllers\FrontendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +41,17 @@ use App\Http\Controllers\FrontendController;
 Route::get('/', function () {
     return view('welcome');
 });
-        
+   
+
+Route::post('/front/all-contact-data/create', [
+    ContactDataController::class,
+    'storeFront',
+])->name('front.all-contact-data.create');
 // Route::get('/{slug}.html', [FrontendController::class, 'buttonpage']);
+
+Route::get('/contacts', [FrontendController::class, 'contacts']);
+Route::get('/contacts.html', [FrontendController::class, 'contacts']);
+Route::get('/contact.html', [FrontendController::class, 'contacts']);
 
 Route::get('/nos-services.html', [FrontendController::class, 'services']);
 Route::get('/services/{slug}', [FrontendController::class, 'services']);
@@ -660,4 +670,33 @@ Route::prefix('/')
             TypeformationController::class,
             'destroy',
         ])->name('typeformations.destroy');
+
+        Route::get('all-contact-data', [
+            ContactDataController::class,
+            'index',
+        ])->name('all-contact-data.index');
+        Route::post('all-contact-data', [
+            ContactDataController::class,
+            'store',
+        ])->name('all-contact-data.store');
+        Route::get('all-contact-data/create', [
+            ContactDataController::class,
+            'create',
+        ])->name('all-contact-data.create');
+        Route::get('all-contact-data/{contactData}', [
+            ContactDataController::class,
+            'show',
+        ])->name('all-contact-data.show');
+        Route::get('all-contact-data/{contactData}/edit', [
+            ContactDataController::class,
+            'edit',
+        ])->name('all-contact-data.edit');
+        Route::put('all-contact-data/{contactData}', [
+            ContactDataController::class,
+            'update',
+        ])->name('all-contact-data.update');
+        Route::delete('all-contact-data/{contactData}', [
+            ContactDataController::class,
+            'destroy',
+        ])->name('all-contact-data.destroy');
     });

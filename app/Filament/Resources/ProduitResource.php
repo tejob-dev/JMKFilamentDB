@@ -118,7 +118,9 @@ class ProduitResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            ProduitResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

@@ -213,7 +213,9 @@ class AccueilmanageritemResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            AccueilmanageritemResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

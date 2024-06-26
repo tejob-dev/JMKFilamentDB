@@ -199,7 +199,9 @@ class EquipeResource extends Resource
 
     public static function getRelations(): array
     {
-        return [];
+        return [
+            EquipeResource\RelationManagers\ContentViewsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array
