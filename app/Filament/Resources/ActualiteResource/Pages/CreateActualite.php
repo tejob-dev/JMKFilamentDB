@@ -11,6 +11,6 @@ class CreateActualite extends CreateRecord
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        return serializeButtonurlFunc($data, "/services/");
+        return serializeButtonurlFunc($data, "/actualites/");
     }
 }
