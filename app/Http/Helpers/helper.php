@@ -19,6 +19,8 @@ function makeWordLikeId($content){
 }
 
 function formatRequiredTextList($content, $limit = false){
+    $content = str_replace([";", ":"], ",", $content);
+
     $compositeBanniereRequiredList = explode(",", $content);
     if($limit) return $compositeBanniereRequiredList;
 
@@ -108,6 +110,16 @@ function sanitizeJsonStringExt($jsonString) {
     return $jsonString;
 }
 
+function sanitizeJsonStringExt2($jsonString) {
+    // Replace single quotes with double quotes
+    $jsonString = str_replace("\n", '', $jsonString);
+    // removeSpaces($jsonString);
+    $jsonString = preg_replace('/,\s*([\]}])/m', '$1', $jsonString);
+    $jsonString = preg_replace('/"\[/', '[', $jsonString);
+    $jsonString = preg_replace('/\]"/', ']', $jsonString);
+    return ($jsonString);
+}
+
 function removeSpaces(&$content) {
     do {
         $content = str_replace(' ', '', $content);
@@ -148,3 +160,30 @@ function serializeButtonurlFunc($data, $type){
     return $data;
 }
 
+function removeKeysRecursively($array, $allowedKeys) {
+    $newArray = [];
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            // Recursively filter nested arrays
+            $newArray[$key] = removeKeysRecursively($value, $allowedKeys);
+        } elseif (in_array($key, $allowedKeys)) {
+            // Only keep keys that are in the allowed list
+            $newArray[$key] = $value;
+        }
+    }
+    return $newArray;
+}
+
+function removeKeysRecursivelyRm($array, $keysToRemove) {
+    $newArray = [];
+    foreach ($array as $key => $value) {
+        if (is_array($value)) {
+            // Recursively filter nested arrays
+            $newArray[$key] = removeKeysRecursivelyRm($value, $keysToRemove);
+        } elseif (!in_array($key, $keysToRemove)) {
+            // Only keep keys that are not in the list of keys to remove
+            $newArray[$key] = $value;
+        }
+    }
+    return $newArray;
+}

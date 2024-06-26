@@ -179,32 +179,91 @@ $setting = App\Models\Setting::first();
 
                         <div class="collapse navbar-collapse show clearfix" style="display: flex!important; flex-direction: row;" id="navbarSupportedContent">
 
+                            @php 
+                                $listContent = App\Models\ContentView::all();//->leftJoin("content_view_types", "content_views.content_view_type_id", "=", "content_view_types.id");
+                                $entetepages = $listContent->filter(function ($contentView) {
+                                        return preg_match("/ENTETE/i", $contentView->contentViewType->title);
+                                });
+                                $compositeView = App\Models\CompositeView::where("title", "like", "%ENTETE%")->first();
+                            @endphp
                             <ul class="navigation clearfix">
-                                <li class="current dropdown">
-                                    <div class="">
-                                        <span class="ag-advans_globe icon"></span>
-                                        <a href="#">Nous découvrir</a>
-                                    </div>
-                                    <ul>
-                                        <li><a href="notre-mission.html">Notre mission</a></li>
-                                        <li><a href="notre-vision.html">Notre vision</a></li>
-                                        <li><a href="nos-valeurs.html">Nos valeurs</a></li>
-                                        <li><a href="notre-equipe.html">Notre equipe</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <div class="">
-                                            <span class="ag-advans_profil icon"></span>
-                                            <a href="#">Notre métier</a>
-                                    </div>
-                                    <ul>
-                                        <li><a href="nos-services.html">Nos services</a></li>
-                                        <li><a href="nos-produits.html">Nos produits</a></li>
-                                        <li><a href="notre-impact.html">Notre impact</a></li>
-                                        <li><a href="nos-projetsactivits.html">Nos projets/activités</a></li>
-                                    </ul>
-                                    <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-                                </li>
+
+                                @foreach($entetepages as $entetepage)
+
+                                    @php
+
+                                    if($compositeView){
+                                        $currContent = $entetepage?->content;
+                                        $compositeBanniereRequiredList = formatRequiredTextList($compositeView?->required);
+                                        $sanitize = sanitizeJsonString($currContent, $compositeBanniereRequiredList);
+                                        $listSanitize = json_decode($sanitize, true);
+                                        //dd($compositeView?->content);
+
+                                        foreach($listSanitize as $sanitizeIt){
+
+                                            if(preg_match("/\{content\}/i", $compositeView?->content) == true){
+
+                                                $content = explode(";", $compositeView?->content)[0];
+                                                $content2 = explode(";", $compositeView?->content)[1];
+
+                                                $listItemStr = "$content2";
+                                                $listItemArr = [];
+
+                                                if(array_key_exists("liste", $sanitizeIt) == true){
+                                                    foreach($sanitizeIt["liste"] as $sanitizeContIt){
+                                                        $eachItems = explode(",", $compositeView?->required);
+                                                        foreach($eachItems as $eached){
+                                                            if(preg_match("/liste/i", $eached) == true){
+                                                                $expls = explode(";", $eached)[1];
+                                                                $explKeys = explode(":", $expls);
+                                                                foreach($explKeys as $explKeyIt){
+                                                                    $listItemStr = str_replace(
+                                                                        "{".$explKeyIt."}",
+                                                                        $sanitizeContIt[$explKeyIt],
+                                                                        $listItemStr
+                                                                    );
+                                                                }
+                                                            }
+    
+                                                        }
+                                                        $listItemArr[] = trim($listItemStr);
+                                                        $listItemStr = "$content2";
+                                                    }
+                                                }
+                                                $lastContent = str_replace("{content}",implode("\n", $listItemArr), $content);
+                                                
+                                                if(array_key_exists("liste", $sanitizeIt) == true){
+                                                    
+                                                    if(sizeof($sanitizeIt["liste"]) == 0){
+                                                        $lastContent = str_replace("dropdown", "", $lastContent);
+                                                    }
+                                                }else{
+                                                    $lastContent = str_replace("dropdown", "", $lastContent);
+                                                }
+                                                //dd(removeKeysRecursivelyRm($sanitizeIt, ["liste"]));
+                                                $eachItems = explode(",", $compositeView?->required);
+                                                foreach($eachItems as $eached){
+                                                    if(preg_match("/liste/i", $eached) == false){
+                                                        //dd($sanitizeIt, "{".$eached."}", $sanitizeContIt, [$eached]);
+                                                        $lastContent = str_replace(
+                                                            "{".$eached."}",
+                                                            $sanitizeIt[$eached],
+                                                            $lastContent
+                                                        );
+                                                    }
+                                                }
+
+                                                //dd($lastContent);
+                                                echo renderHtml($lastContent);
+
+                                            }
+
+                                        }
+                                    }
+
+                                    @endphp
+
+                                @endforeach
                                 <!-- <li class="dropdown"><a href="#">Services</a>
                                     <ul>
                                         <li><a href="services-detail-agriculture.html">Négoce de matière première</a></li>
@@ -231,55 +290,6 @@ $setting = App\Models\Setting::first();
                                     </ul>
                                     <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
                                 </li> -->
-                                <li class="dropdown">
-                                    <div class="">
-                                            <span class="ag-advans_aboutus icon"></span>
-                                            <a href="#">Carrière</a>
-                                    </div>
-                                    <ul>
-                                        <li><a href="notre-culture.html">Notre culture</a></li>
-                                        <li><a href="nos-opportunits.html">Nos opportunités</a></li>
-                                        <li><a href="nous-rejoindre.html">Nous réjoindre</a></li>
-                                    </ul>
-                                    <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-                                </li>
-                                <li class="dropdown">
-                                    <div class="">
-                                            <span class="ag-advans_media icon"></span>
-                                            <a href="#">Media</a>
-                                    </div>
-                                    <ul>
-                                        <li><a href="actualites.html">Actualités</a></li>
-                                        <li><a href="publications.html">Publications</a></li>
-                                        <li><a href="photos.html">Photos</a></li>
-                                        <li><a href="videos.html">Vidéos</a></li>
-                                    </ul>
-                                    <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-                                </li>
-                                <li class="dropdown">
-                                    <div class="">
-                                            <span class="newicon newicon-farmer-1"></span>
-                                            <a href="#">Consortium</a>
-                                    </div>
-                                    <ul>
-                                        <li><a href="jmk-consulting-caompany.html">JMK Consulting Caompany</a></li>
-                                        <li><a href="genie-bio.html">Génie Bio</a></li>
-                                        <li><a href="sicadevd.html">Sicadevd</a></li>
-                                    </ul>
-                                    <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div>
-                                </li>
-                                <li class="">
-                                    <div class="">
-                                            <span class="newicon newicon-professions-and-jobs"></span>
-                                            <a href="/nos-projetsactivits.html">Nos Projets</a>
-                                    </div>
-                                    <!-- <ul>
-                                        <li><a href="jmk-consulting-caompany.html">JMK Consulting Caompany</a></li>
-                                        <li><a href="genie-bio.html">Génie Bio</a></li>
-                                        <li><a href="sicadevd.html">Sicadevd</a></li>
-                                    </ul> -->
-                                    <!-- <div class="dropdown-btn"><span class="fas fa-angle-down"></span></div> -->
-                                </li>
                                 <!-- <li><a href="actualites.html">Actualités</a></li> -->
                             </ul>
                         </div>
@@ -366,7 +376,7 @@ $setting = App\Models\Setting::first();
         </div>
         <div class="social-links">
             <ul class="clearfix">
-                {! $setting->list_social !}
+                {!! renderHtml($setting->list_social) !!}
             </ul>
         </div>
     </nav>
