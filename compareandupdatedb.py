@@ -34,18 +34,18 @@ def insert_into_table_with_dataframe(dataframe, table_name, connection, cursor):
 def main():
     # MySQL connection to the last version database
     last_version_conn = mysql.connector.connect(
-        host='last_version_host',
-        user='your_user',
-        password='your_password',
-        database='last_version_database'
+        host='127.0.0.1',
+        user='root',
+        password='',
+        database='last_jmk_db'
     )
 
     # MySQL connection to the new version database
     new_version_conn = mysql.connector.connect(
-        host='new_version_host',
-        user='your_user',
-        password='your_password',
-        database='new_version_database'
+        host='127.0.0.1',
+        user='root',
+        password='',
+        database='new_jmk_db'
     )
 
     cursor_last_version = last_version_conn.cursor()

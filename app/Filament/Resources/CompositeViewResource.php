@@ -112,7 +112,7 @@ class CompositeViewResource extends Resource
     public static function getRelations(): array
     {
         return [
-            CompositeViewResource\RelationManagers\ContentViewsRelationManager::class,
+            // CompositeViewResource\RelationManagers\ContentViewsRelationManager::class,
         ];
     }
 

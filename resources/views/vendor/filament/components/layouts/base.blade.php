@@ -199,7 +199,17 @@
                         const elements = input.split(',');
         
                         // Transform each element into the desired format
-                        const transformedElements = elements.map(element => `   ${element}: ""`);
+                        const transformedElements = elements.map(element => {
+                            if(element.includes(";")){
+                                var keyi = element.split(';')[0]
+                                var vali = element.split(';')[1]
+                                var valiList = element.split(';')[1].split(":")
+                                var valiListFormat = valiList.map(from => `${from}:""`)
+
+                                return `   ${keyi}: "[\n     { ${valiListFormat.join(', ')} },\n   ]"`
+                            }
+                            return `   ${element}: ""`
+                        });
         
                         // Join the transformed elements with commas and add a trailing comma
                         const result = "[\n {\n"+transformedElements.join(',\n') + ','+"\n},\n]";

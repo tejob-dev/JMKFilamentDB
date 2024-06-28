@@ -21,4 +21,12 @@ class CompositeView extends Model
     {
         return $this->hasMany(ContentView::class);
     }
+
+    // public function contentViews()
+    // {
+    //     // return $this->morphTo();
+    //     // return $this->belongsToMany(ContentView::class, 'content_viewables', 'content_viewable_id', 'content_view_id');
+    //     return $this->morphToMany(ContentView::class, 'content_viewable', 'content_viewables', 'content_viewable_id', 'content_view_id');
+    //     // return $this->morphedByMany(Accueilserviceitem::class, 'content_viewables');
+    // }
 }
