@@ -338,7 +338,7 @@ $lienfooters = App\Models\Lienfooter::get();
                             <div class="working-block-one">
                                 <div class="inner-box">
                                     <div class="image-box">
-                                        <figure class="image"><img src="{{ Storage::url($accueilclientitem?->image) }}" alt="{{ $accueilclientitem?->title }}" style="max-height: 115px;"></figure>
+                                        <figure class="image"><img src="{{ Storage::url($accueilclientitem?->image) }}" alt="{{ $accueilclientitem?->title }}" style="max-height: 200px;"></figure>
                                         <div class="icon-box"><i class="{{ ($accueilclientitem?->icone) }}"></i></div>
                                     </div>
                                     <div class="lower-content">

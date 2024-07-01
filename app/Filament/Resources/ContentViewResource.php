@@ -5,9 +5,11 @@ namespace App\Filament\Resources;
 use App\Models\ContentView;
 use App\Models\CompositeView;
 use Filament\{Tables, Forms};
+use Illuminate\Mail\Markdown;
 use App\Models\ContentViewType;
 use App\Models\Accueilclientitem;
 use App\Models\Accueilserviceitem;
+use Filament\Pages\Actions\Action;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Html;
@@ -16,10 +18,12 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Forms\Components\TextInput;
+use Filament\Pages\Actions\ButtonAction;
 use App\Filament\Filters\DateRangeFilter;
 use Filament\Forms\Components\RichEditor;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\MorphToSelect;
 use Filament\Resources\{Form, Table, Resource};
 use Filament\Forms\Components\MorphToSelect\Type;
@@ -86,12 +90,24 @@ class ContentViewResource extends Resource
                             'lg' => 12,
                         ]),
 
+                    Placeholder::make('indicator')
+                        ->label('Le contenu')
+                        ->content(function (callable $get) {
+                            // $title = $get('title');
+                            return "Current Title: ";
+                        })
+                        ->columnSpan([
+                            'default' => 12,
+                            'md' => 12,
+                            'lg' => 12,
+                        ]),
+                        
                     Textarea::make('content')
                         ->rules(['string'])
                         ->required()
                         ->id('content')
                         ->extraAttributes(['class' => 'content_class'])
-                        ->label('Le contenu')
+                        ->label('')
                         ->placeholder('Le contenu')
                         ->columnSpan([
                             'default' => 12,
@@ -237,7 +253,7 @@ class ContentViewResource extends Resource
             ContentViewResource\RelationManagers\ContactsItemRelationManager::class,
         ];
     }
-
+    
     public static function getPages(): array
     {
         return [
